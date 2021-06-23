@@ -65,5 +65,6 @@ void loop() {
 void setSSTC2() {
   if (sstc2Speed<0) { sstc2Speed=0; } if (sstc2Speed>19) { sstc2Speed=19; }
   if (sstc2Start<0) { sstc2Start=0; } if (sstc2Start>12000) { sstc2Start=12000; }
-  if (sstc2Power<0) { sstc2Power=0; } if (sstc2Power+sstc2Start>12000) { sstc2Power=12000-sstc2Start; }
+  if (sstc2Power<0) { sstc2Power=0; } if (sstc2Power>12000) { sstc2Power=12000; }
+  if (sstc2Start+sstc2Power>12000) { if (header.indexOf("GET /start/inc") >= 0) { sstc2Power=12000-sstc2Start; } else { sstc2Start=12000-sstc2Power; } }
   setSSTC2Para(sstc2SpeedArray[sstc2Speed]-1,sstc2Start,sstc2Power); }
