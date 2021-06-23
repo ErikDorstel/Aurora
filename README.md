@@ -18,7 +18,7 @@ The speed is controlled by suppressing half waves. If every half-wave turns on t
 The start time determines the switch-on delay of the output signal after the zero crossing of the 50Hz sync signal has been recognized.
 #### Power
 The power is set by the duty cycle of the output signal.
-
+#### Schematic
 The controller is designed for a halfbridge SSTC. The 50Hz input sync signal must be 12Volt rms. The output line is open collector. A schematic you will find within the "documentation" subfolder.
 #### Smartphone Screenshot
 ![IMAGE ALT TEXT HERE](https://www.dorstel.de/github/Aurora_v1.1.png)
