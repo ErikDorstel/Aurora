@@ -52,8 +52,7 @@ function doRange(start) {
 
 function sendAJAX(value) {
   if (window.XMLHttpRequest) { ajaxObj=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxObj=new ActiveXObject("Microsoft.XMLHTTP"); }
-  ajaxObj.open("GET",value,false);
-  ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); }
+  ajaxObj.open("GET",value,false); ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); }
 
 </script></head><body onload="SSTC2init();">
 <h1>Aurora</h1>
