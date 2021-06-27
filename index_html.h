@@ -68,15 +68,14 @@ function sendAJAX(value) {
 <p><button class="button button2" onclick="powerDec();">&#8722;</button>
    <button class="button button2" onclick="powerInc();">+</button></p>
 
-<p><button class="button" onclick="toneOff();">Tone Off</button></p>
-<p><button class="button" onclick="toneC();">C</button>
-   <button class="button" onclick="toneD();">D</button></p>
-<p><button class="button" onclick="toneE();">E</button>
-   <button class="button" onclick="toneF();">F</button></p>
-<p><button class="button" onclick="toneG();">G</button>
-   <button class="button" onclick="toneA();">A</button></p>
-<p><button class="button" onclick="toneH();">H</button>
-   <button class="button" onclick="toneC1();">C1</button></p>
+<p><button class="button" ontouchstart="toneC();" ontouchend="toneOff();">C</button>
+   <button class="button" ontouchstart="toneD();" ontouchend="toneOff();">D</button></p>
+<p><button class="button" ontouchstart="toneE();" ontouchend="toneOff();">E</button>
+   <button class="button" ontouchstart="toneF();" ontouchend="toneOff();">F</button></p>
+<p><button class="button" ontouchstart="toneG();" ontouchend="toneOff();">G</button>
+   <button class="button" ontouchstart="toneA();" ontouchend="toneOff();">A</button></p>
+<p><button class="button" ontouchstart="toneH();" ontouchend="toneOff();">H</button>
+   <button class="button" ontouchstart="toneC1();" ontouchend="toneOff();">C1</button></p>
 
 <p><button class="button" onclick="sweepUp();">Sweep Up</button></p>
 <p><button class="button" onclick="sweepDown();">Sweep Down</button></p>
