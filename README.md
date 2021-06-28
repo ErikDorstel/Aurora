@@ -12,13 +12,16 @@ ESP32 based SSTC-2 Controller
   * Ratio control (0/255 to 255/255)
 
 #### GUI
-* click -/+ to decrease/increase speed or start or power
-* touch note to play note
-* click sweep up/down to play sweep
-* click speed to set 50Hz
-* click start to set 0ms
-* click power to set 0ms
-* click ratio to set 180/255
+* sync mode
+  * click -/+ to decrease/increase speed or start or power
+  * click speed to set 50Hz
+  * click start to set 0ms
+  * click power to set 0ms
+* async mode
+  * touch note to play note
+  * click sweep up/down to play sweep
+  * click -/+ to decrease/increase ratio
+  * click ratio to set 180/255
 
 #### Speed
 The speed is controlled by suppressing half waves. If every half-wave turns on the output, the speed is 50Hz. If, for example, the output is only switched on every 5th half-wave, the speed is 1 / (5 * 20ms) = 10Hz.
