@@ -12,35 +12,39 @@ html     { font-family: Helvetica; display: inline-block; margin: 0px auto; text
 <script>
 
 function SSTC2init() {
-  sstc2SpeedArray=[1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,75,100,200,500]; sstc2Speed=0; sstc2Start=0; sstc2Power=0;
+  sstc2SpeedArray=[1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,75,100,200,500]; sstc2Speed=0; sstc2Start=0; sstc2Power=0; sstc2Ratio=180;
   document.getElementById("speedBtn").innerHTML="Speed "+Math.round(5000/sstc2SpeedArray[sstc2Speed])/100+" Hz";
   document.getElementById("startBtn").innerHTML="Start "+sstc2Start/1000+" ms";
-  document.getElementById("powerBtn").innerHTML="Power "+sstc2Power/1000+" ms"; }
+  document.getElementById("powerBtn").innerHTML="Power "+sstc2Power/1000+" ms";
+  document.getElementById("ratioBtn").innerHTML="Ratio "+sstc2Ratio; }
 
-function speedDef() { sstc2Speed=0; doRange(0); }
-function speedDec() { sstc2Speed+=1; doRange(0); }
-function speedInc() { sstc2Speed-=1; doRange(0); }
-function startDef() { sstc2Start=0; doRange(1); }
-function startDec() { sstc2Start-=500; doRange(1); }
-function startInc() { sstc2Start+=500; doRange(1); }
-function powerDef() { sstc2Power=0; doRange(0); }
-function powerDec() { sstc2Power-=500; doRange(0); }
-function powerInc() { sstc2Power+=500; doRange(0); }
+function speedDef() { sstc2Speed=0; doRangeSync(0); }
+function speedDec() { sstc2Speed+=1; doRangeSync(0); }
+function speedInc() { sstc2Speed-=1; doRangeSync(0); }
+function startDef() { sstc2Start=0; doRangeSync(1); }
+function startDec() { sstc2Start-=500; doRangeSync(1); }
+function startInc() { sstc2Start+=500; doRangeSync(1); }
+function powerDef() { sstc2Power=0; doRangeSync(0); }
+function powerDec() { sstc2Power-=500; doRangeSync(0); }
+function powerInc() { sstc2Power+=500; doRangeSync(0); }
+function ratioDef() { sstc2Ratio=180; doRangeAsync(); }
+function ratioDec() { sstc2Ratio-=15; doRangeAsync(); }
+function ratioInc() { sstc2Ratio+=15; doRangeAsync(); }
 
 function toneOff() { sendAJAX("setSSTC2Tone,0,0"); }
-function toneC() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((60-69)/12))*440+","+127); }
-function toneD() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((62-69)/12))*440+","+127); }
-function toneE() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((64-69)/12))*440+","+127); }
-function toneF() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((65-69)/12))*440+","+127); }
-function toneG() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((67-69)/12))*440+","+127); }
-function toneA() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((69-69)/12))*440+","+127); }
-function toneH() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((71-69)/12))*440+","+127); }
-function toneC1() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((72-69)/12))*440+","+127); }
+function toneC() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((60-69)/12))*440+","+sstc2Ratio); }
+function toneD() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((62-69)/12))*440+","+sstc2Ratio); }
+function toneE() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((64-69)/12))*440+","+sstc2Ratio); }
+function toneF() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((65-69)/12))*440+","+sstc2Ratio); }
+function toneG() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((67-69)/12))*440+","+sstc2Ratio); }
+function toneA() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((69-69)/12))*440+","+sstc2Ratio); }
+function toneH() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((71-69)/12))*440+","+sstc2Ratio); }
+function toneC1() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((72-69)/12))*440+","+sstc2Ratio); }
 
-function sweepUp() { sendAJAX("setSSTC2Sweep,100,5000,3000,127"); }
-function sweepDown() { sendAJAX("setSSTC2Sweep,5000,100,3000,127"); }
+function sweepUp() { sendAJAX("setSSTC2Sweep,100,5000,3000,"+sstc2Ratio); }
+function sweepDown() { sendAJAX("setSSTC2Sweep,5000,100,3000,"+sstc2Ratio); }
 
-function doRange(start) {
+function doRangeSync(start) {
   if (sstc2Speed<0) { sstc2Speed=0; } if (sstc2Speed>19) { sstc2Speed=19; }
   if (sstc2Start<0) { sstc2Start=0; } if (sstc2Start>12000) { sstc2Start=12000; }
   if (sstc2Power<0) { sstc2Power=0; } if (sstc2Power>12000) { sstc2Power=12000; }
@@ -49,6 +53,11 @@ function doRange(start) {
   document.getElementById("startBtn").innerHTML="Start "+sstc2Start/1000+" ms";
   document.getElementById("powerBtn").innerHTML="Power "+sstc2Power/1000+" ms";
   sendAJAX("setSSTC2Para"+","+sstc2SpeedArray[sstc2Speed]+","+sstc2Start+","+sstc2Power); }
+
+function doRangeAsync() {
+  if (sstc2Ratio<0) { sstc2Ratio=0; }
+  if (sstc2Ratio>255) { sstc2Ratio=255; }
+  document.getElementById("ratioBtn").innerHTML="Ratio "+sstc2Ratio; }
 
 function sendAJAX(value) {
   if (window.XMLHttpRequest) { ajaxObj=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxObj=new ActiveXObject("Microsoft.XMLHTTP"); }
@@ -79,6 +88,10 @@ function sendAJAX(value) {
 
 <p><button class="button" onclick="sweepUp();">Sweep Up</button></p>
 <p><button class="button" onclick="sweepDown();">Sweep Down</button></p>
+
+<p><button class="button" id="ratioBtn" onclick="ratioDef();"></button></p>
+<p><button class="button button2" onclick="ratioDec();">&#8722;</button>
+   <button class="button button2" onclick="ratioInc();">+</button></p>
 
 </body></html>
 

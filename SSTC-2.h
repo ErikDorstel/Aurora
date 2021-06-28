@@ -39,13 +39,13 @@ void setSSTC2Para(int speed,int start,int power) {
   timerAlarmWrite(timer2,start,false);
   timerAlarmWrite(timer3,power,false); }
 
-void setSSTC2Tone(int freq, int power) {
+void setSSTC2Tone(int freq, int ratio) {
   if (SSTC2mode!=2) { modeSSTC2async(); SSTC2mode=2; }
   if (freq==0) { ledcDetachPin(phaseOut); digitalWrite(phaseOut,HIGH); digitalWrite(onBoardLED,LOW); }
   // uses channel 0 on timer 0
-  else { ledcSetup(0,freq,8); ledcAttachPin(phaseOut,0); ledcWrite(0,255-power); digitalWrite(onBoardLED,HIGH); } }
+  else { ledcSetup(0,freq,8); ledcAttachPin(phaseOut,0); ledcWrite(0,255-ratio); digitalWrite(onBoardLED,HIGH); } }
 
-void setSSTC2Sweep(int freq1, int freq2, int duration, int power) {
-  if (freq1<freq2) { for (int freq=freq1;freq<=freq2;freq+=(freq2-freq1)*20/duration) { setSSTC2Tone(freq,127); delay(20); } setSSTC2Tone(0,0); }
-  if (freq1>freq2) { for (int freq=freq1;freq>=freq2;freq-=(freq1-freq2)*20/duration) { setSSTC2Tone(freq,127); delay(20); } setSSTC2Tone(0,0); } }
+void setSSTC2Sweep(int freq1, int freq2, int duration, int ratio) {
+  if (freq1<freq2) { for (int freq=freq1;freq<=freq2;freq+=(freq2-freq1)*20/duration) { setSSTC2Tone(freq,ratio); delay(20); } setSSTC2Tone(0,0); }
+  if (freq1>freq2) { for (int freq=freq1;freq>=freq2;freq-=(freq1-freq2)*20/duration) { setSSTC2Tone(freq,ratio); delay(20); } setSSTC2Tone(0,0); } }
   
