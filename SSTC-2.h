@@ -30,7 +30,7 @@ void modeSSTC2sync() {
   attachInterrupt(phaseIn,onPhase,RISING); }
   
 void modeSSTC2async() {
-  detachInterrupt(phaseIn); delay(30);
+  detachInterrupt(phaseIn); timerAlarmDisable(timer1); delay(30);
   digitalWrite(phaseOut,HIGH); digitalWrite(onBoardLED,LOW); }
 
 void setSSTC2Para(int speed,int start,int power) {
