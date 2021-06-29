@@ -29,8 +29,8 @@ void loop() {
               int a=header.indexOf(",")+1; int b=header.indexOf(",",a)+1; int c=header.indexOf(",",b)+1; int d=header.indexOf(" ",c)+1;
               setSSTC2Para(header.substring(a,b-1).toInt(),header.substring(b,c-1).toInt(),header.substring(c,d-1).toInt()); }
             else if (header.indexOf("GET /setSSTC2Tone") >= 0) {
-              int a=header.indexOf(",")+1; int b=header.indexOf(",",a)+1; int c=header.indexOf(" ",b)+1;
-              setSSTC2Tone(header.substring(a,b-1).toInt(),header.substring(b,c-1).toInt()); }
+              int a=header.indexOf(",")+1; int b=header.indexOf(",",a)+1; int c=header.indexOf(",",b)+1; int d=header.indexOf(",",c)+1; int e=header.indexOf(" ",d)+1;
+              setSSTC2Tone(header.substring(a,b-1).toInt(),header.substring(b,c-1).toInt(),header.substring(c,d-1).toInt(),header.substring(d,e-1).toInt()); }
             else if (header.indexOf("GET /setSSTC2Sweep") >= 0) {
               int a=header.indexOf(",")+1; int b=header.indexOf(",",a)+1; int c=header.indexOf(",",b)+1; int d=header.indexOf(",",c)+1; int e=header.indexOf(" ",d)+1;
               setSSTC2Sweep(header.substring(a,b-1).toInt(),header.substring(b,c-1).toInt(),header.substring(c,d-1).toInt(),header.substring(d,e-1).toInt()); }

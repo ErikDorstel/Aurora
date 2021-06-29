@@ -12,10 +12,12 @@ html     { font-family: Helvetica; display: inline-block; margin: 0px auto; text
 <script>
 
 function SSTC2init() {
-  sstc2SpeedArray=[1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,75,100,200,500]; sstc2Speed=0; sstc2Start=0; sstc2Power=0; sstc2Ratio=180;
+  sstc2SpeedArray=[1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,75,100,200,500]; sstc2Speed=0; sstc2Start=0; sstc2Power=0; sstc2FreqA=50; sstc2FreqB=50; sstc2Ratio=180;
   document.getElementById("speedBtn").innerHTML="Speed "+Math.round(5000/sstc2SpeedArray[sstc2Speed])/100+" Hz";
   document.getElementById("startBtn").innerHTML="Start "+sstc2Start/1000+" ms";
   document.getElementById("powerBtn").innerHTML="Power "+sstc2Power/1000+" ms";
+  document.getElementById("freqaBtn").innerHTML="Frequency A "+sstc2FreqA;
+  document.getElementById("freqbBtn").innerHTML="Frequency B "+sstc2FreqB;
   document.getElementById("ratioBtn").innerHTML="Ratio "+sstc2Ratio; }
 
 function speedDef() { sstc2Speed=0; doRangeSync(0); }
@@ -27,19 +29,29 @@ function startInc() { sstc2Start+=500; doRangeSync(1); }
 function powerDef() { sstc2Power=0; doRangeSync(0); }
 function powerDec() { sstc2Power-=500; doRangeSync(0); }
 function powerInc() { sstc2Power+=500; doRangeSync(0); }
+function freqaDef() { sstc2FreqA=50; doRangeAsync(); }
+function freqaDec() { sstc2FreqA-=1; doRangeAsync(); }
+function freqaInc() { sstc2FreqA+=1; doRangeAsync(); }
+function freqaDec10() { sstc2FreqA-=10; doRangeAsync(); }
+function freqaInc10() { sstc2FreqA+=10; doRangeAsync(); }
+function freqbDef() { sstc2FreqB=sstc2FreqA; doRangeAsync(); }
+function freqbDec() { sstc2FreqB-=1; doRangeAsync(); }
+function freqbInc() { sstc2FreqB+=1; doRangeAsync(); }
+function freqbDec10() { sstc2FreqB-=10; doRangeAsync(); }
+function freqbInc10() { sstc2FreqB+=10; doRangeAsync(); }
 function ratioDef() { sstc2Ratio=180; doRangeAsync(); }
 function ratioDec() { sstc2Ratio-=15; doRangeAsync(); }
 function ratioInc() { sstc2Ratio+=15; doRangeAsync(); }
 
-function toneOff() { sendAJAX("setSSTC2Tone,0,0"); }
-function toneC() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((60-69)/12))*440+","+sstc2Ratio); }
-function toneD() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((62-69)/12))*440+","+sstc2Ratio); }
-function toneE() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((64-69)/12))*440+","+sstc2Ratio); }
-function toneF() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((65-69)/12))*440+","+sstc2Ratio); }
-function toneG() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((67-69)/12))*440+","+sstc2Ratio); }
-function toneA() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((69-69)/12))*440+","+sstc2Ratio); }
-function toneH() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((71-69)/12))*440+","+sstc2Ratio); }
-function toneC1() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((72-69)/12))*440+","+sstc2Ratio); }
+function toneOff() { sendAJAX("setSSTC2Tone,0,0,0,0"); }
+function toneC() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((60-69)/12))*440+",0,"+sstc2Ratio+",0"); }
+function toneD() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((62-69)/12))*440+",0,"+sstc2Ratio+",0"); }
+function toneE() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((64-69)/12))*440+",0,"+sstc2Ratio+",0"); }
+function toneF() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((65-69)/12))*440+",0,"+sstc2Ratio+",0"); }
+function toneG() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((67-69)/12))*440+",0,"+sstc2Ratio+",0"); }
+function toneA() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((69-69)/12))*440+",0,"+sstc2Ratio+",0"); }
+function toneH() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((71-69)/12))*440+",0,"+sstc2Ratio+",0"); }
+function toneC1() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,((72-69)/12))*440+",0,"+sstc2Ratio+",0"); }
 
 function sweepUp() { sendAJAX("setSSTC2Sweep,100,5000,3000,"+sstc2Ratio); }
 function sweepDown() { sendAJAX("setSSTC2Sweep,5000,100,3000,"+sstc2Ratio); }
@@ -54,10 +66,17 @@ function doRangeSync(start) {
   document.getElementById("powerBtn").innerHTML="Power "+sstc2Power/1000+" ms";
   sendAJAX("setSSTC2Para"+","+sstc2SpeedArray[sstc2Speed]+","+sstc2Start+","+sstc2Power); }
 
-function doRangeAsync() {
+function doRangeAsync(start) {
+  if (sstc2FreqA<0) { sstc2FreqA=0; }
+  if (sstc2FreqA>200) { sstc2FreqA=200; }
+  if (sstc2FreqB<0) { sstc2FreqB=0; }
+  if (sstc2FreqB>200) { sstc2FreqB=200; }
   if (sstc2Ratio<0) { sstc2Ratio=0; }
   if (sstc2Ratio>255) { sstc2Ratio=255; }
-  document.getElementById("ratioBtn").innerHTML="Ratio "+sstc2Ratio; }
+  document.getElementById("freqaBtn").innerHTML="Frequency A "+sstc2FreqA;
+  document.getElementById("freqbBtn").innerHTML="Frequency B "+sstc2FreqB;
+  document.getElementById("ratioBtn").innerHTML="Ratio "+sstc2Ratio;
+  sendAJAX("setSSTC2Tone"+","+sstc2FreqA+","+sstc2FreqB+","+sstc2Ratio+","+sstc2Ratio); }
 
 function sendAJAX(value) {
   if (window.XMLHttpRequest) { ajaxObj=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxObj=new ActiveXObject("Microsoft.XMLHTTP"); }
@@ -89,6 +108,17 @@ function sendAJAX(value) {
 <p><button class="button" onclick="sweepUp();">Sweep Up</button></p>
 <p><button class="button" onclick="sweepDown();">Sweep Down</button></p>
 
+<p><button class="button" onclick="toneOff();">Tone Off</button></p>
+<p><button class="button" id="freqaBtn" onclick="freqaDef();"></button></p>
+<p><button class="button button2" onclick="freqaDec();">&#8722;</button>
+   <button class="button button2" onclick="freqaInc();">+</button></p>
+<p><button class="button button2" onclick="freqaDec10();">&#8722; 10</button>
+   <button class="button button2" onclick="freqaInc10();">+ 10</button></p>   
+<p><button class="button" id="freqbBtn" onclick="freqbDef();"></button></p>
+<p><button class="button button2" onclick="freqbDec();">&#8722;</button>
+   <button class="button button2" onclick="freqbInc();">+</button></p>
+<p><button class="button button2" onclick="freqbDec10();">&#8722; 10</button>
+   <button class="button button2" onclick="freqbInc10();">+ 10</button></p>
 <p><button class="button" id="ratioBtn" onclick="ratioDef();"></button></p>
 <p><button class="button button2" onclick="ratioDec();">&#8722;</button>
    <button class="button button2" onclick="ratioInc();">+</button></p>
