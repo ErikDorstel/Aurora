@@ -18,7 +18,7 @@ ESP32 based SSTC-2 Controller
   * click start to set 0ms
   * click power to set 0ms
 * async mode
-  * touch note to play note
+  * touch note to play note (touchscreen only)
   * click sweep up/down to play sweep
   * click -/+ to decrease/increase ratio
   * click ratio to set 180/255
