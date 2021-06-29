@@ -7,8 +7,8 @@ ESP32 based SSTC-2 Controller
   * Start control (0ms to 12ms)
   * Power control (0ms to 12ms)
 * async mode
-  * play tone
-  * play sweep
+  * play Note
+  * play Sweep
   * Ratio control (0/255 to 255/255)
 
 #### GUI
