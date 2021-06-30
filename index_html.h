@@ -3,15 +3,14 @@ char *index_html=R"(
 <!DOCTYPE html>
 <html><head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="data:,">
 <style>
 html { font-family:Arial; }
-div  { background-color:#888888; border:0px; padding:0px 0px; margin:0px; text-align:center; width:100%; }
-.x0  { background-color:#E0C0C0; border:0px; padding:0.5em 0em; margin:0px; width:100%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
-.x1  { background-color:#C0D0E0; border:0px; padding:0.5em 0em; margin:0px; width:100%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
-.x2  { background-color:#888888; border:0px; padding:0.5em 0em; margin:0px; width:48%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
-.x3  { background-color:#888888; border:0px; padding:0.5em 0em; margin:0px; width:32%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
-.x4  { background-color:#888888; border:0px; padding:0.5em 0em; margin:0px; width:24%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
+div  { background-color:#888888; color:#ffffff; border:0px; padding:0px; margin:0px; text-align:center; width:100%; user-select:none; display:inline-block; }
+.x0  { background-color:#C0A0A0; padding:0.5em 0em; width:100%; font-size:1.5em; }
+.x1  { background-color:#A0B0C0; padding:0.5em 0em; width:100%; font-size:1.5em; }
+.x2  { background-color:#888888; padding:0.5em 0em; width:48%; font-size:1.5em; }
+.x3  { background-color:#888888; padding:0.5em 0em; width:32%; font-size:1.5em; }
+.x4  { background-color:#888888; padding:0.5em 0em; width:24%; font-size:1.5em; }
 </style>
 <script>
 
