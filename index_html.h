@@ -5,9 +5,13 @@ char *index_html=R"(
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:,">
 <style>
-html     { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center; }
-.button  { background-color: #C0D0E0; border: none; color: white; padding: 10px 39px; text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer; }
-.button2 { background-color: #888888; font-size: 50px; padding: 15px 39px; }
+html { font-family:Arial; }
+div  { background-color:#888888; border:0px; padding:0px 0px; margin:0px; text-align:center; width:100%; }
+.x0  { background-color:#E0C0C0; border:0px; padding:0.5em 0em; margin:0px; width:100%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
+.x1  { background-color:#C0D0E0; border:0px; padding:0.5em 0em; margin:0px; width:100%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
+.x2  { background-color:#888888; border:0px; padding:0.5em 0em; margin:0px; width:48%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
+.x3  { background-color:#888888; border:0px; padding:0.5em 0em; margin:0px; width:32%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
+.x4  { background-color:#888888; border:0px; padding:0.5em 0em; margin:0px; width:24%; color:#ffffff; display:inline-block; font-size:1.5em; user-select:none; }
 </style>
 <script>
 
@@ -107,54 +111,54 @@ function sendAJAX(value) {
   ajaxObj.open("GET",value,false); ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); }
 
 </script></head><body onload="SSTC2init();">
-<h1>Aurora</h1>
-<h2>SSTC-2 Controller</h2>
+<div><div class="x0">Aurora</div></div>
+<div><div class="x0">SSTC-2 Controller</div></div>
 
-<p><button class="button" id="speedBtn" onclick="speedDef();"></button></p>
-<p><button class="button button2" onclick="speedDec();">&#8722;</button>
-   <button class="button button2" onclick="speedInc();">+</button></p>
-<p><button class="button" id="startBtn" onclick="startDef();"></button></p>
-<p><button class="button button2" onclick="startDec();">&#8722;</button>
-   <button class="button button2" onclick="startInc();">+</button></p>
-<p><button class="button" id="powerBtn" onclick="powerDef();"></button></p>
-<p><button class="button button2" onclick="powerDec();">&#8722;</button>
-   <button class="button button2" onclick="powerInc();">+</button></p>
+<div><div class="x1" id="speedBtn" onclick="speedDef();"></div></div>
+<div><div class="x2" onclick="speedDec();">&#8722;</div>
+     <div class="x2" onclick="speedInc();">+</div></div>
+<div><div class="x1" id="startBtn" onclick="startDef();"></div></div>
+<div><div class="x2" onclick="startDec();">&#8722;</div>
+     <div class="x2" onclick="startInc();">+</div></div>
+<div><div class="x1" id="powerBtn" onclick="powerDef();"></div></div>
+<div><div class="x2" onclick="powerDec();">&#8722;</div>
+     <div class="x2" onclick="powerInc();">+</div></div>
 
-<p><button class="button" ontouchstart="toneC();" ontouchend="toneOff();">C</button>
-   <button class="button" ontouchstart="toneD();" ontouchend="toneOff();">D</button></p>
-<p><button class="button" ontouchstart="toneE();" ontouchend="toneOff();">E</button>
-   <button class="button" ontouchstart="toneF();" ontouchend="toneOff();">F</button></p>
-<p><button class="button" ontouchstart="toneG();" ontouchend="toneOff();">G</button>
-   <button class="button" ontouchstart="toneA();" ontouchend="toneOff();">A</button></p>
-<p><button class="button" ontouchstart="toneH();" ontouchend="toneOff();">H</button>
-   <button class="button" ontouchstart="toneC1();" ontouchend="toneOff();">C1</button></p>
+<div><div class="x4" ontouchstart="toneC();" ontouchend="toneOff();">C</div>
+     <div class="x4" ontouchstart="toneD();" ontouchend="toneOff();">D</div>
+     <div class="x4" ontouchstart="toneE();" ontouchend="toneOff();">E</div>
+     <div class="x4" ontouchstart="toneF();" ontouchend="toneOff();">F</div></div>
+<div><div class="x4" ontouchstart="toneG();" ontouchend="toneOff();">G</div>
+     <div class="x4" ontouchstart="toneA();" ontouchend="toneOff();">A</div>
+     <div class="x4" ontouchstart="toneH();" ontouchend="toneOff();">H</div>
+     <div class="x4" ontouchstart="toneC1();" ontouchend="toneOff();">C1</div></div>
 
-<p><button class="button" id="sweepaBtn" onclick="sweepaDef();"></button></p>
-<p><button class="button button2" onclick="sweepaDec();">&#8722;</button>
-   <button class="button button2" onclick="sweepaInc();">+</button></p>
-<p><button class="button" id="sweepbBtn" onclick="sweepbDef();"></button></p>
-<p><button class="button button2" onclick="sweepbDec();">&#8722;</button>
-   <button class="button button2" onclick="sweepbInc();">+</button></p>
-<p><button class="button" id="sweepdurBtn" onclick="sweepdurDef();"></button></p>
-<p><button class="button button2" onclick="sweepdurDec();">&#8722;</button>
-   <button class="button button2" onclick="sweepdurInc();">+</button></p>
-<p><button class="button" onclick="sweepUp();">Sweep Up</button></p>
-<p><button class="button" onclick="sweepDown();">Sweep Down</button></p>
+<div><div class="x1" id="sweepaBtn" onclick="sweepaDef();"></div></div>
+<div><div class="x2" onclick="sweepaDec();">&#8722;</div>
+     <div class="x2" onclick="sweepaInc();">+</div></div>
+<div><div class="x1" id="sweepbBtn" onclick="sweepbDef();"></div></div>
+<div><div class="x2" onclick="sweepbDec();">&#8722;</div>
+     <div class="x2" onclick="sweepbInc();">+</div></div>
+<div><div class="x1" id="sweepdurBtn" onclick="sweepdurDef();"></div></div>
+<div><div class="x2" onclick="sweepdurDec();">&#8722;</div>
+     <div class="x2" onclick="sweepdurInc();">+</div></div>
+<div><div class="x2" onclick="sweepUp();">Sweep Up</div>
+     <div class="x2" onclick="sweepDown();">Sweep Down</div></div>
 
-<p><button class="button" onclick="toneOff();">Tone Off</button></p>
-<p><button class="button" id="freqaBtn" onclick="freqaDef();"></button></p>
-<p><button class="button button2" onclick="freqaDec();">&#8722;</button>
-   <button class="button button2" onclick="freqaInc();">+</button></p>
-<p><button class="button button2" onclick="freqaDec10();">&#8722; 10</button>
-   <button class="button button2" onclick="freqaInc10();">+ 10</button></p>   
-<p><button class="button" id="freqbBtn" onclick="freqbDef();"></button></p>
-<p><button class="button button2" onclick="freqbDec();">&#8722;</button>
-   <button class="button button2" onclick="freqbInc();">+</button></p>
-<p><button class="button button2" onclick="freqbDec10();">&#8722; 10</button>
-   <button class="button button2" onclick="freqbInc10();">+ 10</button></p>
-<p><button class="button" id="ratioBtn" onclick="ratioDef();"></button></p>
-<p><button class="button button2" onclick="ratioDec();">&#8722;</button>
-   <button class="button button2" onclick="ratioInc();">+</button></p>
+<div><div class="x1" onclick="toneOff();">Tone Off</div></div>
+<div><div class="x1" id="freqaBtn" onclick="freqaDef();"></div></div>
+<div><div class="x4" onclick="freqaDec10();">&#8722;10</div>
+     <div class="x4" onclick="freqaDec();">&#8722;1</div>
+     <div class="x4" onclick="freqaInc();">+1</div>
+     <div class="x4" onclick="freqaInc10();">+10</div></div>
+<div><div class="x1" id="freqbBtn" onclick="freqbDef();"></div></div>
+<div><div class="x4" onclick="freqbDec10();">&#8722;10</div>
+     <div class="x4" onclick="freqbDec();">&#8722;1</div>
+     <div class="x4" onclick="freqbInc();">+1</div>
+     <div class="x4" onclick="freqbInc10();">+10</div></div>
+<div><div class="x1" id="ratioBtn" onclick="ratioDef();"></div></div>
+<div><div class="x2" onclick="ratioDec();">&#8722;</div>
+     <div class="x2" onclick="ratioInc();">+</div></div>
 
 </body></html>
 
