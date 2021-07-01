@@ -26,8 +26,8 @@ function SSTC2init() {
   document.getElementById("sweepdurBtn").innerHTML="Duration "+sstc2SweepDur+" ms";
   document.getElementById("freqaBtn").innerHTML="Frequency A "+sstc2FreqA+" Hz";
   document.getElementById("freqbBtn").innerHTML="Frequency B "+sstc2FreqB+" Hz";
-  document.getElementById("ratioaBtn").innerHTML="Ratio "+sstc2RatioA;
-  document.getElementById("ratiobBtn").innerHTML="Ratio "+sstc2RatioB; }
+  document.getElementById("ratioaBtn").innerHTML="Ratio A "+sstc2RatioA;
+  document.getElementById("ratiobBtn").innerHTML="Ratio B "+sstc2RatioB; }
 
 function speedDef() { sstc2Speed=0; doRangeSync(0); }
 function speedDec() { sstc2Speed+=1; doRangeSync(0); }
@@ -116,8 +116,8 @@ function doRangeAsync(start) {
   document.getElementById("sweepdurBtn").innerHTML="Duration "+sstc2SweepDur+" ms";
   document.getElementById("freqaBtn").innerHTML="Frequency A "+sstc2FreqA+" Hz";
   document.getElementById("freqbBtn").innerHTML="Frequency B "+sstc2FreqB+" Hz";
-  document.getElementById("ratioaBtn").innerHTML="Ratio "+sstc2RatioA;
-  document.getElementById("ratiobBtn").innerHTML="Ratio "+sstc2RatioB;
+  document.getElementById("ratioaBtn").innerHTML="Ratio A "+sstc2RatioA;
+  document.getElementById("ratiobBtn").innerHTML="Ratio B "+sstc2RatioB;
   if (start==1) { sendAJAX("setSSTC2Tone"+","+sstc2FreqA+","+sstc2FreqB+","+sstc2RatioA+","+sstc2RatioB); } }
 
 function sendAJAX(value) {
