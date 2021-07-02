@@ -15,7 +15,7 @@ div  { background-color:#888888; color:#ffffff; border:0px; padding:0px; margin:
 <script>
 
 function SSTC2init() {
-  sstc2SpeedArray=[1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,75,100,200,500]; sstc2Speed=0; sstc2Start=0; sstc2Power=0;
+  sstc2SpeedArray=[1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,75,100,200,500]; sstc2Speed=9; sstc2Start=0; sstc2Power=0;
   sstc2Octave=1; sstc2SweepA=0; sstc2SweepB=5000; sstc2SweepDur=3000; sstc2FreqA=50; sstc2FreqB=50; sstc2Ratio=50; sstc2RatioA=50; sstc2RatioB=50;
   doDisplay(); }
 
@@ -34,7 +34,7 @@ function doDisplay() {
   document.getElementById("ratioaBtn").innerHTML="Ratio A "+sstc2RatioA;
   document.getElementById("ratiobBtn").innerHTML="Ratio B "+sstc2RatioB; }
 
-function speedDef() { sstc2Speed=0; doRange(1); }
+function speedDef() { sstc2Speed=9; doRange(1); }
 function speedDec() { sstc2Speed+=1; doRange(1); }
 function speedInc() { sstc2Speed-=1; doRange(1); }
 function startDef() { sstc2Start=0; doRange(2); }
@@ -114,7 +114,7 @@ function sendAJAX(value) {
   ajaxObj.open("GET",value,false); ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); }
 
 function guiSwitch(value) {
-  document.getElementById("guiSynchron").style.display="none"; document.getElementById("guiNote").style.display="none";
+  document.getElementById("guiSparks").style.display="none"; document.getElementById("guiNote").style.display="none";
   document.getElementById("guiSweep").style.display="none"; document.getElementById("guiBeating").style.display="none";
   document.getElementById(value).style.display="inline-block"; }
 
@@ -123,13 +123,13 @@ function guiSwitch(value) {
 <div><div class="x0">Aurora</div></div>
 <div><div class="x0">SSTC-2 Controller</div></div>
 
-<div><div class="x2" onclick="guiSwitch('guiSynchron');">Synchron</div>
+<div><div class="x2" onclick="guiSwitch('guiSparks');">Sparks</div>
      <div class="x2" onclick="guiSwitch('guiNote');">Play Note</div></div>
 <div><div class="x2" onclick="guiSwitch('guiSweep');">Play Sweep</div>
      <div class="x2" onclick="guiSwitch('guiBeating');">Beating</div></div>
 
-<div id="guiSynchron" style="display:inline-block;">
-<div><div class="x0">Synchron</div></div>
+<div id="guiSparks" style="display:inline-block;">
+<div><div class="x0">Sparks</div></div>
 <div><div class="x1" id="speedBtn" onclick="speedDef();"></div></div>
 <div><div class="x2" onclick="speedDec();">&#8722;</div>
      <div class="x2" onclick="speedInc();">+</div></div>
