@@ -80,13 +80,17 @@ function ratiobInc() { sstc2RatioB+=5; doRange(3); }
 
 function toneOff() { sendAJAX("setSSTC2Tone,0,0,0,0"); }
 function toneC() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(-9/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
+function toneCx() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(-8/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
 function toneD() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(-7/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
+function toneDx() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(-6/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
 function toneE() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(-5/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
 function toneF() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(-4/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
+function toneFx() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(-3/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
 function toneG() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(-2/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
+function toneGx() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(-1/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
 function toneA() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(0/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
+function toneAx() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(1/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
 function toneH() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(2/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
-function toneCn() { sendAJAX("setSSTC2Tone"+","+Math.pow(2,(3/12)+sstc2Octave)*220+",0,"+sstc2Ratio+",0"); }
 
 function sweepUp() { sendAJAX("setSSTC2Sweep,"+sstc2SweepA+","+sstc2SweepB+","+sstc2SweepDur+","+sstc2Ratio); }
 function sweepDown() { sendAJAX("setSSTC2Sweep,"+sstc2SweepB+","+sstc2SweepA+","+sstc2SweepDur+","+sstc2Ratio); }
@@ -150,13 +154,17 @@ function guiSwitch(value) {
 <div><div class="x2" onclick="ratioDec();">&#8722;</div>
      <div class="x2" onclick="ratioInc();">+</div></div>
 <div><div class="x4" ontouchstart="toneC();" ontouchend="toneOff();">C</div>
+     <div class="x4" ontouchstart="toneCx();" ontouchend="toneOff();">C#</div>
      <div class="x4" ontouchstart="toneD();" ontouchend="toneOff();">D</div>
-     <div class="x4" ontouchstart="toneE();" ontouchend="toneOff();">E</div>
-     <div class="x4" ontouchstart="toneF();" ontouchend="toneOff();">F</div></div>
-<div><div class="x4" ontouchstart="toneG();" ontouchend="toneOff();">G</div>
+     <div class="x4" ontouchstart="toneDx();" ontouchend="toneOff();">D#</div></div>
+<div><div class="x4" ontouchstart="toneE();" ontouchend="toneOff();">E</div>
+     <div class="x4" ontouchstart="toneF();" ontouchend="toneOff();">F</div>
+     <div class="x4" ontouchstart="toneFx();" ontouchend="toneOff();">F#</div>
+     <div class="x4" ontouchstart="toneG();" ontouchend="toneOff();">G</div></div>
+<div><div class="x4" ontouchstart="toneGx();" ontouchend="toneOff();">G#</div>
      <div class="x4" ontouchstart="toneA();" ontouchend="toneOff();">A</div>
-     <div class="x4" ontouchstart="toneH();" ontouchend="toneOff();">H</div>
-     <div class="x4" ontouchstart="toneCn();" ontouchend="toneOff();">C</div></div>
+     <div class="x4" ontouchstart="toneAx();" ontouchend="toneOff();">A#</div>
+     <div class="x4" ontouchstart="toneH();" ontouchend="toneOff();">H</div></div>
 </div>
 
 <div id="guiSweep" style="display:none;">
@@ -195,8 +203,8 @@ function guiSwitch(value) {
 <div><div class="x1" id="ratiobBtn" onclick="ratiobDef();"></div></div>
 <div><div class="x2" onclick="ratiobDec();">&#8722;</div>
      <div class="x2" onclick="ratiobInc();">+</div></div>
-<div><div class="x2" onclick="doRange(3);">Tone On</div>
-     <div class="x2" onclick="toneOff();">Tone Off</div></div>
+<div><div class="x2" onclick="toneOff();">Power Off</div>
+     <div class="x2" onclick="doRange(3);">Power On</div></div>
 </div>
 
 </body></html>
