@@ -7,11 +7,12 @@ ESP32 based SSTC-2 Controller
   * Start control (0ms to 12ms)
   * Power control (0ms to 12ms)
 * async mode
-  * play Note
+  * play Music Notes
   * Octave control
-  * play Sweep
-  * Beating
+  * play Sweeps
+  * Beating Tones
   * Ratio control (0/100 to 100/100)
+  * Touch Controller
 
 #### GUI
 * sync mode
@@ -22,9 +23,10 @@ ESP32 based SSTC-2 Controller
 * async mode
   * touch note to play note (touchscreen only)
   * click sweep up/down to play sweep
-  * click power on/off for beating
+  * click power on/off for beating two tones
   * click -/+ to decrease/increase ratio
   * click ratio to set 50/100
+  * touch the screen to modify tone and ratio (touchscreen only, one or two fingers)
 
 #### Speed
 The speed is controlled by suppressing half waves. If every half-wave turns on the output, the speed is 50Hz. If, for example, the output is only switched on every 5th half-wave, the speed is 1 / (5 * 20ms) = 10Hz.
