@@ -1,8 +1,13 @@
 char *index_html=R"(
 
 <!DOCTYPE html>
-<html><head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head>
+<title>Aurora - SSTC-2 Controller</title>
+<meta name="author" content="Erik Dorstel">
+<meta name="generator" content="vi">
+<meta name="repository" content="https://github.com/ErikDorstel/Aurora">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
 <style>
 html { font-family:Arial; }
 div  { background-color:#888888; color:#ffffff; border:0px; padding:0px; margin:0px; text-align:center; width:100%; user-select:none; display:inline-block; }
