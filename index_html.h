@@ -158,12 +158,6 @@ function guiSwitch(value) {
 
 <div id="guiNotes" style="display:none;">
 <div><div class="x0">Play Music Notes</div></div>
-<div><div class="x1" id="octaveBtn" onclick="octaveDef();"></div></div>
-<div><div class="x2" onclick="octaveDec();">&#8722;</div>
-     <div class="x2" onclick="octaveInc();">+</div></div>
-<div><div class="x1" id="ratioNoteBtn" onclick="ratioDef();"></div></div>
-<div><div class="x2" onclick="ratioDec();">&#8722;</div>
-     <div class="x2" onclick="ratioInc();">+</div></div>
 <div><div class="x4" ontouchstart="toneC();" ontouchend="toneOff();">C</div>
      <div class="x4" ontouchstart="toneCx();" ontouchend="toneOff();">C#</div>
      <div class="x4" ontouchstart="toneD();" ontouchend="toneOff();">D</div>
@@ -176,10 +170,18 @@ function guiSwitch(value) {
      <div class="x4" ontouchstart="toneA();" ontouchend="toneOff();">A</div>
      <div class="x4" ontouchstart="toneAx();" ontouchend="toneOff();">A#</div>
      <div class="x4" ontouchstart="toneH();" ontouchend="toneOff();">H</div></div>
+<div><div class="x1" id="octaveBtn" onclick="octaveDef();"></div></div>
+<div><div class="x2" onclick="octaveDec();">&#8722;</div>
+     <div class="x2" onclick="octaveInc();">+</div></div>
+<div><div class="x1" id="ratioNoteBtn" onclick="ratioDef();"></div></div>
+<div><div class="x2" onclick="ratioDec();">&#8722;</div>
+     <div class="x2" onclick="ratioInc();">+</div></div>
 </div>
 
 <div id="guiSweeps" style="display:none;">
 <div><div class="x0">Play Sweeps</div></div>
+<div><div class="x2" onclick="sweepUp();">Sweep Up</div>
+     <div class="x2" onclick="sweepDown();">Sweep Down</div></div>
 <div><div class="x1" id="sweepaBtn" onclick="sweepaDef();"></div></div>
 <div><div class="x2" onclick="sweepaDec();">&#8722;</div>
      <div class="x2" onclick="sweepaInc();">+</div></div>
@@ -192,12 +194,12 @@ function guiSwitch(value) {
 <div><div class="x1" id="ratioSweepBtn" onclick="ratioDef();"></div></div>
 <div><div class="x2" onclick="ratioDec();">&#8722;</div>
      <div class="x2" onclick="ratioInc();">+</div></div>
-<div><div class="x2" onclick="sweepUp();">Sweep Up</div>
-     <div class="x2" onclick="sweepDown();">Sweep Down</div></div>
 </div>
 
 <div id="guiBeating" style="display:none;">
 <div><div class="x0">Beating Tones</div></div>
+<div><div class="x2" onclick="toneOff();">Power Off</div>
+     <div class="x2" onclick="doRange(3);">Power On</div></div>
 <div><div class="x1" id="freqaBtn" onclick="freqaDef();"></div></div>
 <div><div class="x4" onclick="freqaDec10();">&#8722;10</div>
      <div class="x4" onclick="freqaDec();">&#8722;1</div>
@@ -214,8 +216,6 @@ function guiSwitch(value) {
 <div><div class="x1" id="ratiobBtn" onclick="ratiobDef();"></div></div>
 <div><div class="x2" onclick="ratiobDec();">&#8722;</div>
      <div class="x2" onclick="ratiobInc();">+</div></div>
-<div><div class="x2" onclick="toneOff();">Power Off</div>
-     <div class="x2" onclick="doRange(3);">Power On</div></div>
 </div>
 
 <div id="guiTouch" style="display:none;">
