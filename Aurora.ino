@@ -13,7 +13,7 @@ String header; boolean debug=false; boolean statusStation=false;
 void setup() {
   if (debug) { Serial.begin(115200); }
   initSSTC2(); // Aurora SSTC-2 specific init
-  preferences.begin("Aurora", false); ssidStation=preferences.getString("ssidStation",""); passwordStation=preferences.getString("passwordStation",""); preferences.end();
+  preferences.begin("Aurora",false); ssidStation=preferences.getString("ssidStation",""); passwordStation=preferences.getString("passwordStation",""); preferences.end();
   WiFi.mode(WIFI_AP_STA);
   WiFi.onEvent(WiFiStationConnected,SYSTEM_EVENT_STA_CONNECTED);
   WiFi.onEvent(WiFiStationDisconnected,SYSTEM_EVENT_STA_DISCONNECTED);
@@ -22,7 +22,7 @@ void setup() {
   server.begin(); }
 
 void WiFiStationConnected(WiFiEvent_t event, WiFiEventInfo_t info) {
-  preferences.begin("Aurora", false); preferences.putString("ssidStation", ssidStation); preferences.putString("passwordStation", passwordStation); preferences.end();
+  preferences.begin("Aurora",false); preferences.putString("ssidStation",ssidStation); preferences.putString("passwordStation",passwordStation); preferences.end();
   statusStation=true; if (debug) { Serial.println("WIFI Station " + ssidStation + " Connected."); } }
 void WiFiStationDisconnected(WiFiEvent_t event, WiFiEventInfo_t info) { statusStation=false; WiFi.disconnect(); if (debug) { Serial.println("WIFI Station Disconnected."); } }
 
