@@ -2,6 +2,7 @@
 ESP32 based SSTC-2 Controller
 #### Features
 * WLAN Access Point with Web Server (IP 192.168.4.1)
+* WLAN Station with Web Server (connect to WLAN AP and store credentials in Flash Memory)
 * Sparks (sync mode)
   * Speed control (0.1Hz to 50Hz)
   * Start control (0ms to 12ms)
@@ -27,6 +28,7 @@ ESP32 based SSTC-2 Controller
   * click -/+ to decrease/increase ratio
   * click ratio to set 50/100
   * touch the screen to modify tone and ratio (touchscreen only, one or two fingers)
+* choose and connect to WLAN AP (the credentials will be stored automatically)
 
 #### Speed
 The speed is controlled by suppressing half waves. If every half-wave turns on the output, the speed is 50Hz. If, for example, the output is only switched on every 5th half-wave, the speed is 1 / (5 * 20ms) = 10Hz.
