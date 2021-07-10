@@ -142,11 +142,12 @@ function guiSwitch(value) {
 <div><div class="x0a">Aurora</div></div>
 <div><div class="x0b">SSTC-2 Controller</div></div>
 
-<div><div class="x2" onclick="guiSwitch('guiSparks');">Sparks</div>
-     <div class="x2" onclick="guiSwitch('guiNotes');">Notes</div></div>
-<div><div class="x3" onclick="guiSwitch('guiSweeps');">Sweeps</div>
-     <div class="x3" onclick="guiSwitch('guiBeating');">Beating</div>
-     <div class="x3" onclick="guiSwitch('guiTouch');">Touch</div></div>
+<div><div class="x3" onclick="guiSwitch('guiSparks');">Sparks</div>
+     <div class="x3" onclick="guiSwitch('guiNotes');">Notes</div>
+     <div class="x3" onclick="guiSwitch('guiSweeps');">Sweeps</div></div>
+<div><div class="x3" onclick="guiSwitch('guiBeating');">Beating</div>
+     <div class="x3" onclick="guiSwitch('guiTouch');">Touch</div>
+     <div class="x3" onclick="location.replace('/chooseAP');">WLAN</div></div>
 
 <div id="guiSparks" style="display:inline-block;">
 <div><div class="x0">Fire Sparks</div></div>
