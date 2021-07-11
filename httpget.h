@@ -10,7 +10,7 @@ String httpget(String request) {
 
   else if (request.indexOf("/scanAP")>=0) {
     int indexes=WiFi.scanNetworks(); for (int index=0;index<indexes;++index) { if (WiFi.SSID(index)!="") {
-      response+="<div class=\"x1\" onclick=\"setAP\(\'" + WiFi.SSID(index) + "\'\);\">" + WiFi.RSSI(index) + "&nbsp;dB&nbsp;&nbsp;&nbsp;&nbsp;" + WiFi.SSID(index) + "</div>"; } } }
+      response+="<div class=\"x1\" onclick=\"setAP(\'" + WiFi.SSID(index) + "\');\">" + WiFi.RSSI(index) + "&nbsp;dB&nbsp;&nbsp;&nbsp;&nbsp;" + WiFi.SSID(index) + "</div>"; } } }
 
   else if (request.indexOf("/statusAP")>=0) { if (statusStation==true) { response="<div class=\"x1\">WLAN AP " + ssidStation + " connected.</div>"; }
     else { response="<div class=\"x1\">No WLAN AP connected.</div>"; } }
