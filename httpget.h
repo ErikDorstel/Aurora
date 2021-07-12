@@ -19,8 +19,8 @@ String httpget(String request) {
 
   else if (request.indexOf("/chooseAP")>=0) { response=choose_html; }
 
-  else if (request.indexOf("/statusAP")>=0) { if (statusStation==true) { response="<div class=\"x1\">WLAN AP " + ssidStation + " connected.</div>"; }
-    else { response="<div class=\"x1\">No WLAN AP connected.</div>"; } }
+  else if (request.indexOf("/statusAP")>=0) { if (statusStation==true) { response="<div class=\"x1\">WLAN AP " + ssidStation + " connected.</div>";
+    response+="<div class=\"x1\">IP Address " + WiFi.localIP().toString() + "</div>"; } else { response="<div class=\"x1\">No WLAN AP connected.</div>"; } }
 
   else if (request.indexOf("/authAP")>=0) { response=a2h(ssidStation) + "," + a2h(passwordStation) + ","; }
 
