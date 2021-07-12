@@ -22,13 +22,13 @@ void setup() {
   WiFi.onEvent(WiFiStationConnected,SYSTEM_EVENT_STA_CONNECTED);
   WiFi.onEvent(WiFiStationDisconnected,SYSTEM_EVENT_STA_DISCONNECTED);
   WiFi.softAP(ssidAP,passwordAP); WiFi.begin(ssidStation.c_str(),passwordStation.c_str());
-  IPAddress IP=WiFi.softAPIP(); if (debug) { Serial.print("AP IP address: "); Serial.println(IP); }
+  IPAddress IP=WiFi.softAPIP(); if (debug) { Serial.print("WLAN AP IP address: "); Serial.println(IP); }
   tcpServer.begin(); }
 
 void WiFiStationConnected(WiFiEvent_t event, WiFiEventInfo_t info) {
   preferences.begin("Aurora",false); preferences.putString("ssidStation",ssidStation); preferences.putString("passwordStation",passwordStation); preferences.end();
-  statusStation=true; if (debug) { Serial.println("WIFI Station " + ssidStation + " connected."); } }
+  statusStation=true; if (debug) { Serial.println("WLAN Station " + ssidStation + " connected."); } }
 
-void WiFiStationDisconnected(WiFiEvent_t event, WiFiEventInfo_t info) { statusStation=false; WiFi.disconnect(); if (debug) { Serial.println("WIFI Station disconnected."); } }
+void WiFiStationDisconnected(WiFiEvent_t event, WiFiEventInfo_t info) { statusStation=false; WiFi.disconnect(); if (debug) { Serial.println("WLAN Station disconnected."); } }
 
 void loop() { httpworker(); }

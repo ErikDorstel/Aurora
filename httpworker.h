@@ -1,6 +1,5 @@
 void httpworker() {
-  String header="";
-  WiFiClient httpClient=tcpServer.available();
+  WiFiClient httpClient=tcpServer.available(); String header="";
   if (httpClient) { String currentLine=""; if (debug) { Serial.println("New HTTP Client connected."); }
     while (httpClient.connected()) {
       if (httpClient.available()) { char c=httpClient.read(); header+=c; if (debug) { Serial.write(c); }
