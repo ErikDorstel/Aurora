@@ -22,16 +22,21 @@ String httpget(String request) {
   else if (request.indexOf("/statusAP")>=0) { if (statusStation==true) { response="<div class=\"x1\">WLAN AP " + ssidStation + " connected.</div>";
     response+="<div class=\"x1\">IP Address " + WiFi.localIP().toString() + "</div>"; } else { response="<div class=\"x1\">No WLAN AP connected.</div>"; } }
 
-  else if (request.indexOf("/authAP")>=0) { response=a2h(ssidStation) + "," + a2h(passwordStation) + ","; }
+  else if (request.indexOf("/configAP")>=0) { response=a2h(ssidStation) + "," + a2h(passwordStation) + "," + a2h(mqttBroker) + "," + String(mqttEnabled) + ","; }
+
+  else if (request.indexOf("/statusMQTT")>=0) { if (mqttClient.connected()==true) { response="<div class=\"x1\">MQTT Broker " + mqttBroker + " connected.</div>"; }
+    else { response="<div class=\"x1\">MQTT Broker not connected.</div>"; } }
 
   else if (request.indexOf("/scanAP")>=0) {
     int indexes=WiFi.scanNetworks(); for (int index=0;index<indexes;++index) { if (WiFi.SSID(index)!="") {
       response+="<div class=\"x1\" onclick=\"setAP(\'" + WiFi.SSID(index) + "\');\">" + WiFi.RSSI(index) + "&nbsp;dB&nbsp;&nbsp;&nbsp;&nbsp;" + WiFi.SSID(index) + "</div>"; } } }
 
   else if (request.indexOf("/connectAP")>=0) {
-    int a=request.indexOf(",")+1; int b=request.indexOf(",",a)+1;
-    ssidStation=h2a(request.substring(a,b-1)); passwordStation=h2a(request.substring(b));
-    if (statusStation==true) { WiFi.disconnect(); delay(100); } WiFi.begin(ssidStation.c_str(),passwordStation.c_str()); delay(1000); }
+    int a=request.indexOf(",")+1; int b=request.indexOf(",",a)+1; int c=request.indexOf(",",b)+1; int d=request.indexOf(",",c)+1;
+    ssidStation=h2a(request.substring(a,b-1)); passwordStation=h2a(request.substring(b,c-1)); mqttBroker=h2a(request.substring(c,d-1)); if (request.substring(d)=="false") { mqttEnabled=false; } else { mqttEnabled=true; }
+    mqttLastConnect=millis(); if (mqttClient.connected()) { mqttClient.disconnect(); delay(100); }
+    mqttLastConnect=millis(); if (statusStation==true) { WiFi.disconnect(); delay(100); }
+    mqttLastConnect=millis(); WiFi.begin(ssidStation.c_str(),passwordStation.c_str()); delay(1000); }
 
   // Default page
 
