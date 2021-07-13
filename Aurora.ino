@@ -1,4 +1,4 @@
-boolean debug=true;
+boolean debug=false;
 
 #include "SSTC-2.h"
 #include "WLAN.h"

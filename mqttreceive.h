@@ -8,7 +8,7 @@ void mqttReceive(char* chartopic, byte* bytemessage, unsigned int bytelength) {
     mqttClient.publish("stat/aurora/STATUS10",response.c_str()); }
 
   if (topic=="cmnd/aurora/status" & (message=="0" | message=="11")) {
-    String response="{\"StatusSTS\":{\"POWER\":\"OFF\",\"WLAN\":{\"SSID\":\"" + ssidStation + "\",\"IP\":\"" + WiFi.localIP().toString() + "\"}}}";
+    String response="{\"StatusSTS\":{\"POWER\":\"OFF\",\"WLAN\":{\"SSID\":\"" + ssidStation + "\",\"IP\":\"" + WiFi.localIP().toString() + "\",\"RSSI\":\"" + WiFi.RSSI() + " dB\"}}}";
     mqttClient.publish("stat/aurora/STATUS11",response.c_str()); }
 
   else if (topic=="cmnd/aurora/para") {
