@@ -3,12 +3,12 @@
 void initMQTT() {
   mqttClient.setServer(mqttBroker.c_str(),1883);
   mqttClient.setCallback(mqttReceive);
-  mqttClient.connect("aurora");
-  if (mqttClient.connected() & debug) { Serial.println("MQTT Broker " + mqttBroker + " connected."); }
-  if (!mqttClient.connected()) { mqttEnabled=false; if (debug) { Serial.println("MQTT Broker " + mqttBroker + " disabled."); } }
-  mqttClient.subscribe("tele/aurora/#");
+  mqttClient.connect("aurora","tele/aurora/LWT",0,1,"Offline");
+  if (mqttClient.connected()) { if (debug) { Serial.println("MQTT Broker " + mqttBroker + " connected."); } }
+  else { mqttEnabled=false; if (debug) { Serial.println("MQTT Broker " + mqttBroker + " disabled."); } }
   mqttClient.subscribe("cmnd/aurora/#");
-  mqttClient.subscribe("stat/aurora/#");
-  mqttClient.publish("tele/aurora/LWT","Online"); }
+  mqttClient.publish("tele/aurora/LWT","Online",1); }
 
-void mqttWorker() { if (mqttClient.connected()) { mqttClient.loop(); } else { if (millis()>mqttLastConnect+10000) { mqttLastConnect=millis(); initMQTT(); } } }
+void mqttWorker() {
+  if (mqttEnabled) { if (mqttClient.connected()) { mqttClient.loop(); }
+    else if (millis()>mqttLastConnect+10000) { mqttLastConnect=millis(); initMQTT(); } } }

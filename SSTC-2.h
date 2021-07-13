@@ -48,6 +48,7 @@ void setSSTC2Tone(int freqA, int ratioA, int freqB, int ratioB) {
   if (freqB>0 & ratioB>0) { timerAlarmWrite(timer3,1000000/freqB,true); timerAlarmWrite(timer4,10000*ratioB/freqB,false); timerRestart(timer3); timerAlarmEnable(timer3); } else { timerAlarmDisable(timer3); } }
 
 void setSSTC2Sweep(int freq1, int freq2, int duration, int ratio) {
-  if (freq1<freq2 & duration>0) { for (int freq=freq1;freq<=freq2;freq+=(freq2-freq1)*20/duration) { setSSTC2Tone(freq,ratio,0,0); delay(20); } setSSTC2Tone(0,0,0,0); }
-  if (freq1>freq2 & duration>0) { for (int freq=freq1;freq>=freq2;freq-=(freq1-freq2)*20/duration) { setSSTC2Tone(freq,ratio,0,0); delay(20); } setSSTC2Tone(0,0,0,0); } }
+  int step; if (duration>0) { step=abs(freq1-freq2)*20/duration; } else { step=0; }
+  if (freq1<freq2 & step>0) { for (int freq=freq1;freq<=freq2;freq+=step) { setSSTC2Tone(freq,ratio,0,0); delay(20); } setSSTC2Tone(0,0,0,0); }
+  if (freq1>freq2 & step>0) { for (int freq=freq1;freq>=freq2;freq-=step) { setSSTC2Tone(freq,ratio,0,0); delay(20); } setSSTC2Tone(0,0,0,0); } }
   
