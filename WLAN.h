@@ -1,6 +1,7 @@
 #include <WiFi.h>
 WiFiServer tcpServer(80);
 WiFiClient mqttProtocol;
+WiFiUDP dnsServer;
 #include <Preferences.h>
 Preferences preferences;
 #include <PubSubClient.h>
@@ -23,6 +24,7 @@ void initWLAN() {
   WiFi.mode(WIFI_AP_STA);
   WiFi.onEvent(WiFiStationConnected,SYSTEM_EVENT_STA_CONNECTED);
   WiFi.onEvent(WiFiStationDisconnected,SYSTEM_EVENT_STA_DISCONNECTED);
-  WiFi.softAP(ssidAP,passwordAP); WiFi.begin(ssidStation.c_str(),passwordStation.c_str());
+  WiFi.softAP(ssidAP,passwordAP); WiFi.softAPConfig(IPAddress(192,168,4,1),IPAddress(192,168,4,1),IPAddress(255,255,255,0));
+  WiFi.begin(ssidStation.c_str(),passwordStation.c_str());
   IPAddress IP=WiFi.softAPIP(); if (debug) { Serial.print("WLAN AP IP address: "); Serial.println(IP); }
-  tcpServer.begin(); }
+  tcpServer.begin(); dnsServer.begin(53); }

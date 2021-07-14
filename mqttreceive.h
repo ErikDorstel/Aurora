@@ -1,7 +1,7 @@
 void mqttReceive(char* chartopic, byte* bytemessage, unsigned int bytelength) {
   String topic; for (int index=0;index<strlen(chartopic);index++) { topic+=(char)chartopic[index]; }
   String message; for (int index=0;index<bytelength;index++) { message+=(char)bytemessage[index]; }
-  if (debug) { Serial.println("MQTT Message " + topic + " " + message); }
+  if (debug) { Serial.println("MQTT Message " + topic + " " + message + " from " + mqttBroker + "."); }
 
   if (topic=="cmnd/aurora/status" & (message=="0" | message=="10")) {
     String response="{\"StatusSNS\":{\"Device\":\"Aurora SSTC-2\",\"Topics\":{\"cmnd/aurora/para\",\"cmnd/aurora/tone\",\"cmnd/aurora/sweep\"}}}";
