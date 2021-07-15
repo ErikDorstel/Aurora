@@ -24,7 +24,7 @@ The power is set by the on-time of the output signal.
 #### Schematic
 The controller is designed for a halfbridge SSTC. The 50Hz input sync signal must be 12Volt rms. The output line is open collector. A schematic you will find within the "documentation" subfolder.
 #### MQTT
-The MQTT client supports the following topics. The topic syntax is compatible to https://github.com/ErikDorstel/tasView.
+The MQTT client supports the following topics. The topic syntax is compatible to [tasView mqtt client](https://github.com/ErikDorstel/tasView).
 * cmnd/aurora/status 0
 * cmnd/aurora/status 10
 * cmnd/aurora/status 11
