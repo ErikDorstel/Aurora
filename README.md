@@ -28,7 +28,7 @@ The MQTT client supports the following topics. The topic syntax is compatible to
 * cmnd/aurora/status 0
 * cmnd/aurora/status 10
 * cmnd/aurora/status 11
-* cmnd/aurora/para <speed>,<start µs>,<power µs>
+* cmnd/aurora/para \<speed\>,\<start µs\>,\<power µs\>
 * cmnd/aurora/tone <freqA Hz>,<ratioA %>,<freqB Hz>,<ratioB %>
 * cmnd/aurora/sweep <freqA Hz>,<freqB Hz>,<duration ms>,<ratio %>
  
