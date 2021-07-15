@@ -14,10 +14,10 @@ void httpWorker() {
             httpClient.println("Content-type:text/html");
             httpClient.println("Connection: close");
             httpClient.println();
-            int a=header.indexOf("GET "); int b=header.indexOf(" ",a+4); if (a>=0) {
-              httpClient.println(httpget(header.substring(a+4,b)));
+            int a=header.indexOf("GET "); int b=header.indexOf(" ",a+4);
+            if (a>=0) { httpClient.println(httpget(header.substring(a+4,b)));
               if (debug) { Serial.println("HTTP Request " + header.substring(a+4,b) + " received."); } }
             break; }
           else { currentLine=""; } }
-        else if (c!='\r') {  currentLine+=c; } } }
+        else if (c!='\r') { currentLine+=c; } } }
     header = ""; httpClient.stop(); } }
