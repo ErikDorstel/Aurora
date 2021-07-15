@@ -1,6 +1,6 @@
 void dnsWorker() {
-  byte request[200]; int requestlength;
-  if (dnsServer.parsePacket()) { requestlength=dnsServer.available(); dnsServer.read(request,requestlength);
+  if (dnsServer.parsePacket()) {
+    byte request[200]; int requestlength; requestlength=dnsServer.available(); dnsServer.read(request,requestlength);
     // type A, class IN, aurora.tesla
     byte host[]={1,0,0,1,0,0,0,0,0,0,6,0x61,0x75,0x72,0x6F,0x72,0x61,5,0x74,0x65,0x73,0x6C,0x61,0,0,1,0,1};
     if (memcmp(request+2,host,requestlength-2)==0) {

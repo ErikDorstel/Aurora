@@ -26,5 +26,5 @@ void initWLAN() {
   WiFi.onEvent(WiFiStationDisconnected,SYSTEM_EVENT_STA_DISCONNECTED);
   WiFi.softAP(ssidAP,passwordAP); WiFi.softAPConfig(IPAddress(192,168,4,1),IPAddress(192,168,4,1),IPAddress(255,255,255,0));
   WiFi.begin(ssidStation.c_str(),passwordStation.c_str());
-  IPAddress IP=WiFi.softAPIP(); if (debug) { Serial.print("WLAN AP IP address: "); Serial.println(IP); }
+  if (debug) { Serial.println("WLAN AP with IP address " + WiFi.softAPIP().toString() + " enabled."); }
   tcpServer.begin(); dnsServer.begin(53); }
