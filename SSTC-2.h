@@ -51,4 +51,3 @@ void setSSTC2Sweep(int freq1, int freq2, int duration, int ratio) {
   int step; if (duration>0) { step=abs(freq1-freq2)*20/duration; } else { step=0; }
   if (freq1<freq2 & step>0) { for (int freq=freq1;freq<=freq2;freq+=step) { setSSTC2Tone(freq,ratio,0,0); delay(20); } setSSTC2Tone(0,0,0,0); }
   if (freq1>freq2 & step>0) { for (int freq=freq1;freq>=freq2;freq-=step) { setSSTC2Tone(freq,ratio,0,0); delay(20); } setSSTC2Tone(0,0,0,0); } }
-  

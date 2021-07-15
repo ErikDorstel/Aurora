@@ -24,10 +24,14 @@ input[type=checkbox] { width:1.2em; height:1.2em; }
 <script>
 
 function initChoose() {
-  document.getElementById("statusAP").innerHTML=sendAJAX("statusAP"); configAP=sendAJAX("configAP"); document.getElementById("statusMQTT").innerHTML=sendAJAX("statusMQTT");
-  document.getElementById("APName").value=h2a(configAP.split(",")[0]); document.getElementById("APPassword").value=h2a(configAP.split(",")[1]);
+  statusChoose(); statusChooseID=window.setInterval("statusChoose();",5000);
+  configAP=sendAJAX("configAP"); document.getElementById("APName").value=h2a(configAP.split(",")[0]); document.getElementById("APPassword").value=h2a(configAP.split(",")[1]);
   document.getElementById("MQTTBroker").value=h2a(configAP.split(",")[2]); if (configAP.split(",")[3]=="0") { document.getElementById("MQTTEnabled").checked=false; }
     else { document.getElementById("MQTTEnabled").checked=true; } }
+
+function statusChoose() {
+  document.getElementById("statusAP").innerHTML=sendAJAX("statusAP");
+  document.getElementById("statusMQTT").innerHTML=sendAJAX("statusMQTT"); }
   
 function scanAP() {
   document.getElementById("resultAP").innerHTML="<div class=\"x1\">Scan for WLAN Networks ...</div>";
@@ -42,7 +46,7 @@ function connectAP() {
     if (document.getElementById("MQTTBroker").value=="") { document.getElementById("MQTTEnabled").checked=false; }
     document.getElementById("resultAP").innerHTML="<div class=\"x1\">&nbsp;</div>";
     document.getElementById("statusAP").innerHTML="<div class=\"x1\">Connecting WLAN AP "+document.getElementById("APName").value+" ...</div>";
-    document.getElementById("statusMQTT").innerHTML="<div class=\"x1\">&nbsp;</div>"; window.setTimeout("initChoose();",5000); 
+    document.getElementById("statusMQTT").innerHTML="<div class=\"x1\">&nbsp;</div>"; window.clearInterval(statusChooseID); window.setTimeout("initChoose();",5000); 
     sendAJAX("connectAP,"+a2h(document.getElementById("APName").value)+","+a2h(document.getElementById("APPassword").value)+","+a2h(document.getElementById("MQTTBroker").value)+","+document.getElementById("MQTTEnabled").checked); } }
 
 function sendAJAX(value) {
