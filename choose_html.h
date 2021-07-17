@@ -42,24 +42,23 @@ function connectAP() {
     requestAJAXconnectAP("connectAP,"+a2h(document.getElementById("APName").value)+","+a2h(document.getElementById("APPassword").value)+","+a2h(document.getElementById("MQTTBroker").value)+","+document.getElementById("MQTTEnabled").checked); } }
 
 function requestAJAXstatusAP() {
-  if (window.XMLHttpRequest) { ajaxOBJstatusAP=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJstatusAP=new ActiveXObject("Microsoft.XMLHTTP"); }
-  ajaxOBJstatusAP.open("GET","statusAP",true); ajaxOBJstatusAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJstatusAP.addEventListener('load',replyAJAXstatusAP); ajaxOBJstatusAP.send(); }
+  ajaxOBJstatusAP=new XMLHttpRequest; ajaxOBJstatusAP.open("GET","statusAP",true); ajaxOBJstatusAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  ajaxOBJstatusAP.addEventListener('load',replyAJAXstatusAP); ajaxOBJstatusAP.send(); }
 
 function requestAJAXstatusMQTT() {
-  if (window.XMLHttpRequest) { ajaxOBJstatusMQTT=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJstatusMQTT=new ActiveXObject("Microsoft.XMLHTTP"); }
-  ajaxOBJstatusMQTT.open("GET","statusMQTT",true); ajaxOBJstatusMQTT.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJstatusMQTT.addEventListener('load',replyAJAXstatusMQTT); ajaxOBJstatusMQTT.send(); }
+  ajaxOBJstatusMQTT=new XMLHttpRequest; ajaxOBJstatusMQTT.open("GET","statusMQTT",true); ajaxOBJstatusMQTT.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  ajaxOBJstatusMQTT.addEventListener('load',replyAJAXstatusMQTT); ajaxOBJstatusMQTT.send(); }
 
 function requestAJAXconfigAP() {
-  if (window.XMLHttpRequest) { ajaxOBJconfigAP=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJconfigAP=new ActiveXObject("Microsoft.XMLHTTP"); }
-  ajaxOBJconfigAP.open("GET","configAP",true); ajaxOBJconfigAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJconfigAP.addEventListener('load',replyAJAXconfigAP); ajaxOBJconfigAP.send(); }
+  ajaxOBJconfigAP=new XMLHttpRequest; ajaxOBJconfigAP.open("GET","configAP",true); ajaxOBJconfigAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  ajaxOBJconfigAP.addEventListener('load',replyAJAXconfigAP); ajaxOBJconfigAP.send(); }
 
 function requestAJAXscanAP() {
-  if (window.XMLHttpRequest) { ajaxOBJscanAP=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJscanAP=new ActiveXObject("Microsoft.XMLHTTP"); }
-  ajaxOBJscanAP.open("GET","scanAP",true); ajaxOBJscanAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJscanAP.addEventListener('load',replyAJAXscanAP); ajaxOBJscanAP.send(); }
+  ajaxOBJscanAP=new XMLHttpRequest; ajaxOBJscanAP.open("GET","scanAP",true); ajaxOBJscanAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+  ajaxOBJscanAP.addEventListener('load',replyAJAXscanAP); ajaxOBJscanAP.send(); }
 
 function requestAJAXconnectAP(value) {
-  if (window.XMLHttpRequest) { ajaxOBJconnectAP=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJconnectAP=new ActiveXObject("Microsoft.XMLHTTP"); }
-  ajaxOBJconnectAP.open("GET",value,true); ajaxOBJconnectAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJconnectAP.send(); }
+  ajaxOBJconnectAP=new XMLHttpRequest; ajaxOBJconnectAP.open("GET",value,true); ajaxOBJconnectAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJconnectAP.send(); }
 
 function replyAJAXstatusAP() { if (ajaxOBJstatusAP.status==200) { document.getElementById("statusAP").innerHTML=ajaxOBJstatusAP.responseText; } }
 

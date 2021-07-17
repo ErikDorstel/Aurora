@@ -129,8 +129,7 @@ function doRange(start) {
   if (start==3) { sendAJAX("setSSTC2Tone,"+sstc2FreqA+","+sstc2RatioA+","+sstc2FreqB+","+sstc2RatioB); } }
 
 function sendAJAX(value) {
-  if (window.XMLHttpRequest) { ajaxObj=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxObj=new ActiveXObject("Microsoft.XMLHTTP"); }
-  ajaxObj.open("GET",value,true); ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); }
+  ajaxObj=new XMLHttpRequest; ajaxObj.open("GET",value,true); ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); }
 
 function guiSwitch(value) {
   document.getElementById("guiSparks").style.display="none"; document.getElementById("guiNotes").style.display="none";
