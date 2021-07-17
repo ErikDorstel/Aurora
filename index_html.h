@@ -130,7 +130,7 @@ function doRange(start) {
 
 function sendAJAX(value) {
   if (window.XMLHttpRequest) { ajaxObj=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxObj=new ActiveXObject("Microsoft.XMLHTTP"); }
-  ajaxObj.open("GET",value,false); ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); }
+  ajaxObj.open("GET",value,true); ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); }
 
 function guiSwitch(value) {
   document.getElementById("guiSparks").style.display="none"; document.getElementById("guiNotes").style.display="none";

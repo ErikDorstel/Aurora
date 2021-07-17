@@ -23,19 +23,11 @@ input[type=checkbox] { width:1.2em; height:1.2em; }
 </style>
 <script>
 
-function initChoose() {
-  statusChoose(); statusChooseID=window.setInterval("statusChoose();",5000);
-  configAP=sendAJAX("configAP"); document.getElementById("APName").value=h2a(configAP.split(",")[0]); document.getElementById("APPassword").value=h2a(configAP.split(",")[1]);
-  document.getElementById("MQTTBroker").value=h2a(configAP.split(",")[2]); if (configAP.split(",")[3]=="0") { document.getElementById("MQTTEnabled").checked=false; }
-    else { document.getElementById("MQTTEnabled").checked=true; } }
+function initChoose() { statusChoose(); statusChooseID=window.setInterval("statusChoose();",5000); requestAJAXconfigAP(); }
 
-function statusChoose() {
-  document.getElementById("statusAP").innerHTML=sendAJAX("statusAP");
-  document.getElementById("statusMQTT").innerHTML=sendAJAX("statusMQTT"); }
-  
-function scanAP() {
-  document.getElementById("resultAP").innerHTML="<div class=\"x1\">Scan for WLAN Networks ...</div>";
-  document.getElementById("resultAP").innerHTML=sendAJAX("scanAP"); }
+function statusChoose() { requestAJAXstatusAP(); requestAJAXstatusMQTT(); }
+
+function scanAP() { document.getElementById("resultAP").innerHTML="<div class=\"x1\">Scan for WLAN Networks ...</div>"; requestAJAXscanAP(); }
 
 function setAP(value) {
   document.getElementById("APName").value=value; document.getElementById("APPassword").value="";
@@ -47,11 +39,38 @@ function connectAP() {
     document.getElementById("resultAP").innerHTML="<div class=\"x1\">&nbsp;</div>";
     document.getElementById("statusAP").innerHTML="<div class=\"x1\">Connecting WLAN AP "+document.getElementById("APName").value+" ...</div>";
     document.getElementById("statusMQTT").innerHTML="<div class=\"x1\">&nbsp;</div>"; window.clearInterval(statusChooseID); window.setTimeout("initChoose();",5000); 
-    sendAJAX("connectAP,"+a2h(document.getElementById("APName").value)+","+a2h(document.getElementById("APPassword").value)+","+a2h(document.getElementById("MQTTBroker").value)+","+document.getElementById("MQTTEnabled").checked); } }
+    requestAJAXconnectAP("connectAP,"+a2h(document.getElementById("APName").value)+","+a2h(document.getElementById("APPassword").value)+","+a2h(document.getElementById("MQTTBroker").value)+","+document.getElementById("MQTTEnabled").checked); } }
 
-function sendAJAX(value) {
-  if (window.XMLHttpRequest) { ajaxObj=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxObj=new ActiveXObject("Microsoft.XMLHTTP"); }
-  ajaxObj.open("GET",value,false); ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); return ajaxObj.responseText; }
+function requestAJAXstatusAP() {
+  if (window.XMLHttpRequest) { ajaxOBJstatusAP=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJstatusAP=new ActiveXObject("Microsoft.XMLHTTP"); }
+  ajaxOBJstatusAP.open("GET","statusAP",true); ajaxOBJstatusAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJstatusAP.addEventListener('load',replyAJAXstatusAP); ajaxOBJstatusAP.send(); }
+
+function requestAJAXstatusMQTT() {
+  if (window.XMLHttpRequest) { ajaxOBJstatusMQTT=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJstatusMQTT=new ActiveXObject("Microsoft.XMLHTTP"); }
+  ajaxOBJstatusMQTT.open("GET","statusMQTT",true); ajaxOBJstatusMQTT.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJstatusMQTT.addEventListener('load',replyAJAXstatusMQTT); ajaxOBJstatusMQTT.send(); }
+
+function requestAJAXconfigAP() {
+  if (window.XMLHttpRequest) { ajaxOBJconfigAP=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJconfigAP=new ActiveXObject("Microsoft.XMLHTTP"); }
+  ajaxOBJconfigAP.open("GET","configAP",true); ajaxOBJconfigAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJconfigAP.addEventListener('load',replyAJAXconfigAP); ajaxOBJconfigAP.send(); }
+
+function requestAJAXscanAP() {
+  if (window.XMLHttpRequest) { ajaxOBJscanAP=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJscanAP=new ActiveXObject("Microsoft.XMLHTTP"); }
+  ajaxOBJscanAP.open("GET","scanAP",true); ajaxOBJscanAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJscanAP.addEventListener('load',replyAJAXscanAP); ajaxOBJscanAP.send(); }
+
+function requestAJAXconnectAP(value) {
+  if (window.XMLHttpRequest) { ajaxOBJconnectAP=new XMLHttpRequest; } else if (window.ActiveXObject) { ajaxOBJconnectAP=new ActiveXObject("Microsoft.XMLHTTP"); }
+  ajaxOBJconnectAP.open("GET",value,true); ajaxOBJconnectAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJconnectAP.send(); }
+
+function replyAJAXstatusAP() { if (ajaxOBJstatusAP.status==200) { document.getElementById("statusAP").innerHTML=ajaxOBJstatusAP.responseText; } }
+
+function replyAJAXstatusMQTT() { if (ajaxOBJstatusMQTT.status==200) { document.getElementById("statusMQTT").innerHTML=ajaxOBJstatusMQTT.responseText; } }
+
+function replyAJAXconfigAP() { if (ajaxOBJconfigAP.status==200) { configAP=ajaxOBJconfigAP.responseText;
+  document.getElementById("APName").value=h2a(configAP.split(",")[0]); document.getElementById("APPassword").value=h2a(configAP.split(",")[1]);
+  document.getElementById("MQTTBroker").value=h2a(configAP.split(",")[2]); if (configAP.split(",")[3]=="0") { document.getElementById("MQTTEnabled").checked=false; }
+    else { document.getElementById("MQTTEnabled").checked=true; } } }
+
+function replyAJAXscanAP() { if (ajaxOBJscanAP.status==200) { document.getElementById("resultAP").innerHTML=ajaxOBJscanAP.responseText; } }
 
 function a2h(aValue) { hValue=[]; for (idx=0;idx<aValue.length;idx++) { hValue.push(Number(aValue.charCodeAt(idx)).toString(16)); } return hValue.join(''); }
 function h2a(hValue) { aValue=""; for (idx=0;idx<hValue.length;idx+=2) { aValue+=String.fromCharCode(parseInt(hValue.substr(idx,2),16)); } return aValue; }
