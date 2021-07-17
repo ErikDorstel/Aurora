@@ -16,7 +16,7 @@ void httpWorker() {
             httpClient.println();
             int a=header.indexOf("GET "); int b=header.indexOf(" ",a+4);
             if (a>=0) { httpClient.println(httpget(header.substring(a+4,b)));
-              if (debug) { Serial.println("HTTP Request " + header.substring(a+4,b) + " received."); } }
+              if (debug) { Serial.println("HTTP Request " + header.substring(a+4,b) + " from " + httpClient.remoteIP().toString() + " received."); } }
             break; }
           else { currentLine=""; } }
         else if (c!='\r') { currentLine+=c; } } }

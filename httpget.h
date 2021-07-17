@@ -33,10 +33,8 @@ String httpget(String request) {
 
   else if (request.indexOf("/connectAP")>=0) {
     int a=request.indexOf(",")+1; int b=request.indexOf(",",a)+1; int c=request.indexOf(",",b)+1; int d=request.indexOf(",",c)+1;
-    ssidStation=h2a(request.substring(a,b-1)); passwordStation=h2a(request.substring(b,c-1)); mqttBroker=h2a(request.substring(c,d-1)); if (request.substring(d)=="false") { mqttEnabled=false; } else { mqttEnabled=true; }
-    mqttLastConnect=millis(); if (mqttClient.connected()) { mqttProtocol.flush(); mqttProtocol.stop(); mqttClient.disconnect(); delay(100); }
-    mqttLastConnect=millis(); if (statusStation==true) { WiFi.disconnect(); delay(100); }
-    mqttLastConnect=millis(); WiFi.begin(ssidStation.c_str(),passwordStation.c_str()); delay(1000); }
+    ssidStation=h2a(request.substring(a,b-1)); passwordStation=h2a(request.substring(b,c-1)); mqttBroker=h2a(request.substring(c,d-1));
+    if (request.substring(d)=="false") { mqttEnabled=false; } else { mqttEnabled=true; } reconnectWLAN(); }
 
   // Default page
 

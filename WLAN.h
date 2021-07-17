@@ -28,3 +28,8 @@ void initWLAN() {
   WiFi.begin(ssidStation.c_str(),passwordStation.c_str());
   if (debug) { Serial.println("WLAN AP with IP address " + WiFi.softAPIP().toString() + " enabled."); }
   tcpServer.begin(); dnsServer.begin(53); }
+
+void reconnectWLAN() {
+  if (mqttClient.connected()) { mqttProtocol.flush(); mqttProtocol.stop(); mqttClient.disconnect(); }
+  if (statusStation==true) { WiFi.disconnect(); delay(500); }
+  mqttLastConnect=millis()+5000; WiFi.begin(ssidStation.c_str(),passwordStation.c_str()); }

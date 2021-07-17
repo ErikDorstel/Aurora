@@ -1,6 +1,7 @@
 #include "mqttreceive.h"
 
 void initMQTT() {
+  mqttClient.setSocketTimeout(5);
   mqttClient.setServer(mqttBroker.c_str(),1883);
   mqttClient.setCallback(mqttReceive);
   if (mqttClient.connect("aurora","tele/aurora/LWT",0,1,"Offline")) {
@@ -11,4 +12,4 @@ void initMQTT() {
 
 void mqttWorker() {
   if (mqttEnabled) { if (mqttClient.connected()) { mqttClient.loop(); }
-    else if (millis()>mqttLastConnect+10000) { mqttLastConnect=millis(); initMQTT(); } } }
+    else if (millis()>mqttLastConnect+5000) { mqttLastConnect=millis(); initMQTT(); } } }

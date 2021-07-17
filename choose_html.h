@@ -38,7 +38,7 @@ function connectAP() {
     if (document.getElementById("MQTTBroker").value=="") { document.getElementById("MQTTEnabled").checked=false; }
     document.getElementById("resultAP").innerHTML="<div class=\"x1\">&nbsp;</div>";
     document.getElementById("statusAP").innerHTML="<div class=\"x1\">Connecting WLAN AP "+document.getElementById("APName").value+" ...</div>";
-    document.getElementById("statusMQTT").innerHTML="<div class=\"x1\">&nbsp;</div>"; window.clearInterval(statusChooseID); window.setTimeout("initChoose();",5000); 
+    document.getElementById("statusMQTT").innerHTML="<div class=\"x1\">&nbsp;</div>"; window.clearInterval(statusChooseID); window.setTimeout("initChoose();",5000);
     requestAJAXconnectAP("connectAP,"+a2h(document.getElementById("APName").value)+","+a2h(document.getElementById("APPassword").value)+","+a2h(document.getElementById("MQTTBroker").value)+","+document.getElementById("MQTTEnabled").checked); } }
 
 function requestAJAXstatusAP() {
