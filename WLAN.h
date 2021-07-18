@@ -30,6 +30,6 @@ void initWLAN() {
   tcpServer.begin(); dnsServer.begin(53); }
 
 void reconnectWLAN() {
-  if (mqttClient.connected()) { mqttProtocol.flush(); mqttProtocol.stop(); mqttClient.disconnect(); }
-  if (statusStation==true) { WiFi.disconnect(); delay(500); }
+  if (mqttClient.connected()) { mqttProtocol.flush(); mqttProtocol.stop(); mqttClient.disconnect(); delay(250); }
+  if (statusStation==true) { WiFi.disconnect(); delay(250); }
   mqttLastConnect=millis()+5000; WiFi.begin(ssidStation.c_str(),passwordStation.c_str()); }
