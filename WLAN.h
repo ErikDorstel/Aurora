@@ -24,8 +24,8 @@ void initWLAN() {
   WiFi.mode(WIFI_AP_STA);
   WiFi.onEvent(WiFiStationConnected,SYSTEM_EVENT_STA_CONNECTED);
   WiFi.onEvent(WiFiStationDisconnected,SYSTEM_EVENT_STA_DISCONNECTED);
-  WiFi.softAP(ssidAP,passwordAP); WiFi.softAPConfig(IPAddress(192,168,4,1),IPAddress(192,168,4,1),IPAddress(255,255,255,0));
-  WiFi.begin(ssidStation.c_str(),passwordStation.c_str());
+  WiFi.softAPConfig(IPAddress(192,168,4,1),IPAddress(192,168,4,1),IPAddress(255,255,255,0)); WiFi.softAP(ssidAP,passwordAP);
+  WiFi.setHostname("aurora.tesla"); WiFi.begin(ssidStation.c_str(),passwordStation.c_str());
   if (debug) { Serial.println("WLAN AP with IP address " + WiFi.softAPIP().toString() + " enabled."); }
   tcpServer.begin(); dnsServer.begin(53); }
 

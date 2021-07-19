@@ -23,53 +23,38 @@ input[type=checkbox] { width:1.2em; height:1.2em; }
 </style>
 <script>
 
-function initChoose() { statusChoose(); statusChooseID=window.setInterval("statusChoose();",5000); requestAJAXconfigAP(); }
+function initChoose() { ajaxObj=[]; statusChoose(); statusChooseID=window.setInterval("statusChoose();",5000); requestAJAX("configAP"); }
 
-function statusChoose() { requestAJAXstatusAP(); requestAJAXstatusMQTT(); }
+function statusChoose() { requestAJAX("statusAP"); requestAJAX("statusMQTT"); }
 
-function scanAP() { document.getElementById("resultAP").innerHTML="<div class=\"x1\">Scan for WLAN Networks ...</div>"; requestAJAXscanAP(); }
+function configAP(value) {
+  document.getElementById("APName").value=h2a(value.split(",")[0]); document.getElementById("APPassword").value=h2a(value.split(",")[1]);
+  document.getElementById("MQTTBroker").value=h2a(value.split(",")[2]); if (value.split(",")[3]=="0") { document.getElementById("MQTTEnabled").checked=false; }
+    else { document.getElementById("MQTTEnabled").checked=true; } }
+
+function scanAP() { document.getElementById("scanAP").innerHTML="<div class=\"x1\">Scan for WLAN Networks ...</div>"; requestAJAX("scanAP"); }
 
 function setAP(value) {
   document.getElementById("APName").value=value; document.getElementById("APPassword").value="";
-  document.getElementById("resultAP").innerHTML="<div class=\"x1\">&nbsp;</div>"; }
+  document.getElementById("scanAP").innerHTML="<div class=\"x1\">&nbsp;</div>"; }
 
 function connectAP() {
   if (document.getElementById("APName").value!="" & document.getElementById("APPassword").value!="") {
     if (document.getElementById("MQTTBroker").value=="") { document.getElementById("MQTTEnabled").checked=false; }
-    document.getElementById("resultAP").innerHTML="<div class=\"x1\">&nbsp;</div>";
+    document.getElementById("scanAP").innerHTML="<div class=\"x1\">&nbsp;</div>";
     document.getElementById("statusAP").innerHTML="<div class=\"x1\">Connecting WLAN AP "+document.getElementById("APName").value+" ...</div>";
     document.getElementById("statusMQTT").innerHTML="<div class=\"x1\">&nbsp;</div>"; window.clearInterval(statusChooseID); window.setTimeout("initChoose();",5000);
-    requestAJAXconnectAP("connectAP,"+a2h(document.getElementById("APName").value)+","+a2h(document.getElementById("APPassword").value)+","+a2h(document.getElementById("MQTTBroker").value)+","+document.getElementById("MQTTEnabled").checked); } }
+    requestAJAX("connectAP,"+a2h(document.getElementById("APName").value)+","+a2h(document.getElementById("APPassword").value)+","+a2h(document.getElementById("MQTTBroker").value)+","+document.getElementById("MQTTEnabled").checked); } }
 
-function requestAJAXstatusAP() {
-  ajaxOBJstatusAP=new XMLHttpRequest; ajaxOBJstatusAP.open("GET","statusAP",true); ajaxOBJstatusAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  ajaxOBJstatusAP.addEventListener('load',replyAJAXstatusAP); ajaxOBJstatusAP.send(); }
+function requestAJAX(value) {
+  ajaxObj[value]=new XMLHttpRequest; ajaxObj[value].url=value; ajaxObj[value].open("GET",value,true);
+  ajaxObj[value].setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj[value].addEventListener('load',replyAJAX); ajaxObj[value].send(); }
 
-function requestAJAXstatusMQTT() {
-  ajaxOBJstatusMQTT=new XMLHttpRequest; ajaxOBJstatusMQTT.open("GET","statusMQTT",true); ajaxOBJstatusMQTT.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  ajaxOBJstatusMQTT.addEventListener('load',replyAJAXstatusMQTT); ajaxOBJstatusMQTT.send(); }
-
-function requestAJAXconfigAP() {
-  ajaxOBJconfigAP=new XMLHttpRequest; ajaxOBJconfigAP.open("GET","configAP",true); ajaxOBJconfigAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  ajaxOBJconfigAP.addEventListener('load',replyAJAXconfigAP); ajaxOBJconfigAP.send(); }
-
-function requestAJAXscanAP() {
-  ajaxOBJscanAP=new XMLHttpRequest; ajaxOBJscanAP.open("GET","scanAP",true); ajaxOBJscanAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  ajaxOBJscanAP.addEventListener('load',replyAJAXscanAP); ajaxOBJscanAP.send(); }
-
-function requestAJAXconnectAP(value) {
-  ajaxOBJconnectAP=new XMLHttpRequest; ajaxOBJconnectAP.open("GET",value,true); ajaxOBJconnectAP.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxOBJconnectAP.send(); }
-
-function replyAJAXstatusAP() { if (ajaxOBJstatusAP.status==200) { document.getElementById("statusAP").innerHTML=ajaxOBJstatusAP.responseText; } }
-
-function replyAJAXstatusMQTT() { if (ajaxOBJstatusMQTT.status==200) { document.getElementById("statusMQTT").innerHTML=ajaxOBJstatusMQTT.responseText; } }
-
-function replyAJAXconfigAP() { if (ajaxOBJconfigAP.status==200) { configAP=ajaxOBJconfigAP.responseText;
-  document.getElementById("APName").value=h2a(configAP.split(",")[0]); document.getElementById("APPassword").value=h2a(configAP.split(",")[1]);
-  document.getElementById("MQTTBroker").value=h2a(configAP.split(",")[2]); if (configAP.split(",")[3]=="0") { document.getElementById("MQTTEnabled").checked=false; }
-    else { document.getElementById("MQTTEnabled").checked=true; } } }
-
-function replyAJAXscanAP() { if (ajaxOBJscanAP.status==200) { document.getElementById("resultAP").innerHTML=ajaxOBJscanAP.responseText; } }
+function replyAJAX(event) {
+  if (event.target.status==200) {
+    if (event.target.url.startsWith("connectAP")) { }
+    else if (event.target.url=="configAP") { configAP(event.target.responseText); }
+    else document.getElementById(event.target.url).innerHTML=event.target.responseText; } }
 
 function a2h(aValue) { hValue=[]; for (idx=0;idx<aValue.length;idx++) { hValue.push(Number(aValue.charCodeAt(idx)).toString(16)); } return hValue.join(''); }
 function h2a(hValue) { aValue=""; for (idx=0;idx<hValue.length;idx+=2) { aValue+=String.fromCharCode(parseInt(hValue.substr(idx,2),16)); } return aValue; }
@@ -78,7 +63,7 @@ function h2a(hValue) { aValue=""; for (idx=0;idx<hValue.length;idx+=2) { aValue+
 
 <div><div class="x0a">Aurora</div></div>
 <div><div class="x0b">SSTC-2 Controller</div></div>
-<div id="resultAP"><div class="x1">&nbsp;</div></div>
+<div id="scanAP"><div class="x1">&nbsp;</div></div>
 <div><div class="x2">WLAN Name</div>
      <div class="x2">Password</div></div>
 <div><div class="x2"><form><input id="APName" type="text"></form></div>
