@@ -11,8 +11,10 @@ void httpWorker() {
         if (c=='\n') {
           if (currentLine.length()==0) {
             httpClient.println("HTTP/1.1 200 OK");
-            httpClient.println("Content-type:text/html");
-            httpClient.println("Connection: close");
+            httpClient.println("Content-Type: text/html; charset=utf-8");
+            httpClient.println("Connection: keep-alive");
+            httpClient.println("Keep-Alive: timeout=5, max=1000");
+            httpClient.println("Server: ESP32");
             httpClient.println();
             int a=header.indexOf("GET "); int b=header.indexOf(" ",a+4);
             if (a>=0) { httpClient.println(httpget(header.substring(a+4,b)));
