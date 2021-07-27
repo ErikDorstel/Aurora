@@ -1,9 +1,30 @@
+byte channels[]={  0,  2,  4,  6,  8, 10, 12, 14};
+byte outGPIOs[]={  4, 13, 16, 17, 21, 22, 23, 25};
+byte inGPIOs[]= { 26, 27, 32, 33, 34, 35, 36, 39};
+byte midiChan[]={  0,  0,  0,  0,  0,  0,  0,  0};
+byte midiNote[]={255,255,255,255,255,255,255,255};
+
+byte mountVoice(byte channel,byte note) {
+  byte voice=255; for (byte index=0;index<8;index++) { if (midiNote[index]==255) { voice=index; break; } }
+  if (voice!=255) { midiNote[voice]=note; midiChan[voice]=channel; } return voice; }
+
+byte unmountVoice(byte channel,byte note) {
+  byte voice=255; for (byte index=0;index<8;index++) { if (midiNote[index]==note & midiChan[index]==channel) { voice=index; break; } }
+  if (voice!=255) { midiNote[voice]=255; midiChan[voice]=0; } return voice; }
+
 void midiNoteOn(byte channel,byte note,byte velocity) {
-  ledcWriteTone(0,(pow(2,(float(note)-69)/12))*440);
-  ledcWrite(0,velocity/8);
-  ledcAttachPin(phaseOut,0);
-  if (debug) { Serial.println("MIDI Note " + String(note) + " On on channel " + String(channel) + " received."); } }
+  byte voice=mountVoice(channel,note);
+  if (voice!=255) {
+    ledcWriteTone(channels[voice],(pow(2,(float(note)-69)/12))*440);
+    ledcWrite(channels[voice],velocity/8);
+    ledcAttachPin(outGPIOs[voice],channels[voice]); }
+  if (debug) { Serial.println("MIDI Note " + String(note) + " On on channel " + String(channel) + " received. Play on voice " + String(voice) +"."); } }
 
 void midiNoteOff(byte channel,byte note,byte velocity) {
-  ledcDetachPin(phaseOut);
-  if (debug) { Serial.println("MIDI Note " + String(note) + " Off on channel " + String(channel) + " received."); } }
+  byte voice=unmountVoice(channel,note);
+  if (voice!=255) { ledcDetachPin(outGPIOs[voice]); }
+  if (debug) { Serial.println("MIDI Note " + String(note) + " Off on channel " + String(channel) + " received. Stop on voice " + String(voice) +"."); } }
+
+void midiControlChange(byte channel,byte data1,byte data2) {
+  if (data1==120 | data1==123) { for (byte voice=0;voice<8;voice++) { ledcDetachPin(outGPIOs[voice]); midiNote[voice]=255; midiChan[voice]=0; }
+    if (debug) { Serial.println("MIDI stop all sounds received."); } } }
