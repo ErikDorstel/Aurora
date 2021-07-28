@@ -3,7 +3,7 @@ APPLEMIDI_CREATE_DEFAULTSESSION_INSTANCE();
 
 #include "midireceive.h"
 
-void ioChange() {
+void IRAM_ATTR ioChange() {
   if (digitalRead(inGPIOs[0])==LOW & digitalRead(inGPIOs[1])==LOW & digitalRead(inGPIOs[2])==LOW & digitalRead(inGPIOs[3])==LOW &
     digitalRead(inGPIOs[4])==LOW & digitalRead(inGPIOs[5])==LOW & digitalRead(inGPIOs[6])==LOW & digitalRead(inGPIOs[7])==LOW)
     { digitalWrite(phaseOut,HIGH); digitalWrite(onBoardLED,LOW); }
