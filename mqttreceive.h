@@ -17,7 +17,9 @@ void mqttReceive(char* chartopic, byte* bytemessage, unsigned int bytelength) {
 
   else if (topic=="cmnd/aurora.tesla/tone") {
     int a=message.indexOf(",")+1; int b=message.indexOf(",",a)+1; int c=message.indexOf(",",b)+1;
-    setSSTC2Tone(message.substring(0,a-1).toInt(),message.substring(a,b-1).toInt(),message.substring(b,c-1).toInt(),message.substring(c).toInt()); }
+    setSSTC2PWM(0,message.substring(0,a-1).toInt(),message.substring(a,b-1).toInt());
+    setSSTC2PWM(1,message.substring(b,c-1).toInt(),message.substring(c).toInt()); }
+    //setSSTC2Tone(message.substring(0,a-1).toInt(),message.substring(a,b-1).toInt(),message.substring(b,c-1).toInt(),message.substring(c).toInt()); }
 
   else if (topic=="cmnd/aurora.tesla/sweep") {
     int a=message.indexOf(",")+1; int b=message.indexOf(",",a)+1; int c=message.indexOf(",",b)+1;

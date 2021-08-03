@@ -9,8 +9,8 @@ String httpget(String request) {
 
   else if (request.indexOf("/setSSTC2Tone")>=0) {
     int a=request.indexOf(",")+1; int b=request.indexOf(",",a)+1; int c=request.indexOf(",",b)+1; int d=request.indexOf(",",c)+1;
-    setSSTC2PWM(0,request.substring(a,b-1).toInt(),request.substring(b,c-1).toInt()*2.55);
-    setSSTC2PWM(1,request.substring(c,d-1).toInt(),request.substring(d).toInt()*2.55); }
+    setSSTC2PWM(0,request.substring(a,b-1).toInt(),request.substring(b,c-1).toInt());
+    setSSTC2PWM(1,request.substring(c,d-1).toInt(),request.substring(d).toInt()); }
     //setSSTC2Tone(request.substring(a,b-1).toInt(),request.substring(b,c-1).toInt(),request.substring(c,d-1).toInt(),request.substring(d).toInt()); }
 
   else if (request.indexOf("/setSSTC2Sweep")>=0) {

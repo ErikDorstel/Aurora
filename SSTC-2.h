@@ -65,5 +65,5 @@ void setSSTC2Sweep(int freq1, int freq2, int duration, int ratio) {
   if (freq1>freq2 & step>0) { for (int freq=freq1;freq>=freq2;freq-=step) { setSSTC2Tone(freq,ratio,0,0); delay(20); } setSSTC2Tone(0,0,0,0); } }
 
 void setSSTC2PWM(byte voice,int freq,int ratio) {
-  if (freq>0 & ratio>0) { ledcDetachPin(outGPIOs[voice]); ledcSetup(channels[voice],freq,8); ledcWrite(channels[voice],ratio); ledcAttachPin(outGPIOs[voice],channels[voice]); }
+  if (freq>0 & ratio>0) { ledcDetachPin(outGPIOs[voice]); ledcSetup(channels[voice],freq,10); ledcWrite(channels[voice],ratio*10.23); ledcAttachPin(outGPIOs[voice],channels[voice]); }
   else { ledcDetachPin(outGPIOs[voice]); } }
