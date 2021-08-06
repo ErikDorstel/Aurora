@@ -1,5 +1,5 @@
 #include <AppleMIDI.h>
-APPLEMIDI_CREATE_DEFAULTSESSION_INSTANCE();
+APPLEMIDI_CREATE_INSTANCE(WiFiUDP,MIDI,"SSTC-2 Aurora",5004);
 
 #include "midireceive.h"
 

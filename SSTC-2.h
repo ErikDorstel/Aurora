@@ -59,11 +59,11 @@ void setSSTC2Tone(int freqA, int ratioA, int freqB, int ratioB) {
   if (freqA>0 & ratioA>0) { timerAlarmWrite(timer1,1000000/freqA,true); timerAlarmWrite(timer2,10000*ratioA/freqA,false); timerRestart(timer1); timerAlarmEnable(timer1); } else { timerAlarmDisable(timer1); }
   if (freqB>0 & ratioB>0) { timerAlarmWrite(timer3,1000000/freqB,true); timerAlarmWrite(timer4,10000*ratioB/freqB,false); timerRestart(timer3); timerAlarmEnable(timer3); } else { timerAlarmDisable(timer3); } }
 
+void setSSTC2PWM(byte voice,int freq,int ratio) {
+  if (freq>0 & ratio>0 & voice>=0 & voice<=7) { ledcDetachPin(outGPIOs[voice]); ledcSetup(channels[voice],freq,10); ledcWrite(channels[voice],ratio*10.23); ledcAttachPin(outGPIOs[voice],channels[voice]); }
+  else { ledcDetachPin(outGPIOs[voice]); } }
+
 void setSSTC2Sweep(int freq1, int freq2, int duration, int ratio) {
   int step; if (duration>0) { step=abs(freq1-freq2)*20/duration; } else { step=0; }
-  if (freq1<freq2 & step>0) { for (int freq=freq1;freq<=freq2;freq+=step) { setSSTC2Tone(freq,ratio,0,0); delay(20); } setSSTC2Tone(0,0,0,0); }
-  if (freq1>freq2 & step>0) { for (int freq=freq1;freq>=freq2;freq-=step) { setSSTC2Tone(freq,ratio,0,0); delay(20); } setSSTC2Tone(0,0,0,0); } }
-
-void setSSTC2PWM(byte voice,int freq,int ratio) {
-  if (freq>0 & ratio>0) { ledcDetachPin(outGPIOs[voice]); ledcSetup(channels[voice],freq,10); ledcWrite(channels[voice],ratio*10.23); ledcAttachPin(outGPIOs[voice],channels[voice]); }
-  else { ledcDetachPin(outGPIOs[voice]); } }
+  if (freq1<freq2 & step>0) { for (int freq=freq1;freq<=freq2;freq+=step) { setSSTC2PWM(0,freq,ratio); delay(20); } setSSTC2PWM(0,0,0); }
+  if (freq1>freq2 & step>0) { for (int freq=freq1;freq>=freq2;freq-=step) { setSSTC2PWM(0,freq,ratio); delay(20); } setSSTC2PWM(0,0,0); } }

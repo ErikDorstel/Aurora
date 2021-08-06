@@ -85,19 +85,19 @@ function ratiobDef() { sstc2RatioB=50; doRange(3); }
 function ratiobDec() { sstc2RatioB-=5; doRange(3); }
 function ratiobInc() { sstc2RatioB+=5; doRange(3); }
 
-function toneOff() { sendAJAX("setSSTC2Tone,0,0,0,0"); window.setTimeout("sendAJAX('setSSTC2Tone,0,0,0,0');",10); }
-function toneC() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(-9/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneCx() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(-8/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneD() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(-7/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneDx() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(-6/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneE() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(-5/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneF() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(-4/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneFx() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(-3/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneG() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(-2/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneGx() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(-1/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneA() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(0/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneAx() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(1/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
-function toneH() { sendAJAX("setSSTC2Tone,"+Math.pow(2,(2/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneOff() { sendAJAX("setSSTC2PWM,0,0,0,0"); window.setTimeout("sendAJAX('setSSTC2PWM,0,0,0,0');",10); }
+function toneC() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(-9/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneCx() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(-8/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneD() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(-7/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneDx() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(-6/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneE() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(-5/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneF() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(-4/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneFx() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(-3/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneG() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(-2/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneGx() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(-1/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneA() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(0/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneAx() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(1/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
+function toneH() { sendAJAX("setSSTC2PWM,"+Math.pow(2,(2/12)+sstc2Octave)*220+","+sstc2Ratio+",0,0"); }
 
 function sweepUp() { sendAJAX("setSSTC2Sweep,"+sstc2SweepA+","+sstc2SweepB+","+sstc2SweepDur+","+sstc2Ratio); }
 function sweepDown() { sendAJAX("setSSTC2Sweep,"+sstc2SweepB+","+sstc2SweepA+","+sstc2SweepDur+","+sstc2Ratio); }
@@ -108,7 +108,7 @@ function doTouch(event) {
       if (x1<0 | x1>buttonObj.width | y1<0 | y1>buttonObj.height) { x1=0; y1=0; } } else { x1=0; y1=0; }
     if (event.touches[1]) { touchObj=event.touches[1]; x2=touchObj.pageX-buttonObj.left; y2=touchObj.pageY-buttonObj.top;
       if (x2<0 | x2>buttonObj.width | y2<0 | y2>buttonObj.height) { x2=0; y2=0; } } else { x2=0; y2=0; }
-    sendAJAX("setSSTC2Tone,"+Math.floor(Math.pow(x1/buttonObj.width*17.1,3))+","+Math.floor(y1/buttonObj.height*100)+","+Math.floor(Math.pow(x2/buttonObj.width*17.1,3))+","+Math.floor(y2/buttonObj.height*100)); } }
+    sendAJAX("setSSTC2PWM,"+Math.floor(Math.pow(x1/buttonObj.width*17.1,3))+","+Math.floor(y1/buttonObj.height*100)+","+Math.floor(Math.pow(x2/buttonObj.width*17.1,3))+","+Math.floor(y2/buttonObj.height*100)); } }
 
 function doRange(start) {
   if (sstc2Speed<0) { sstc2Speed=0; } if (sstc2Speed>19) { sstc2Speed=19; }
@@ -126,7 +126,7 @@ function doRange(start) {
   if (sstc2RatioB<0) { sstc2RatioB=0; } if (sstc2RatioB>100) { sstc2RatioB=100; }
   doDisplay();
   if (start==1 | start==2) { sendAJAX("setSSTC2Para"+","+sstc2SpeedArray[sstc2Speed]+","+sstc2Start+","+sstc2Power); }
-  if (start==3) { sendAJAX("setSSTC2Tone,"+sstc2FreqA+","+sstc2RatioA+","+sstc2FreqB+","+sstc2RatioB); } }
+  if (start==3) { sendAJAX("setSSTC2PWM,"+sstc2FreqA+","+sstc2RatioA+","+sstc2FreqB+","+sstc2RatioB); } }
 
 function sendAJAX(value) {
   ajaxObj=new XMLHttpRequest; ajaxObj.open("GET",value,true); ajaxObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); ajaxObj.send(); }

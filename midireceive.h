@@ -11,7 +11,7 @@ byte unmountVoice(byte channel,byte note) {
 
 void midiNoteOn(byte channel,byte note,byte velocity) {
   byte voice=mountVoice(channel,note);
-  if (voice!=255) { setSSTC2PWM(voice,(pow(2,(float(note)-69)/12))*440,velocity); }
+  if (voice!=255) { setSSTC2PWM(voice,(pow(2,(float(note)-69)/12))*440,velocity/6); }
   if (debug) { Serial.println("MIDI Note " + String(note) + " On on channel " + String(channel) + " received. Play on voice " + String(voice) +"."); } }
 
 void midiNoteOff(byte channel,byte note,byte velocity) {
