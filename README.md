@@ -5,6 +5,10 @@ ESP32 based SSTC-2 Controller
 * DNS server to resolve local hostname aurora.tesla
 * WLAN Station mode with Web Server (connect to WLAN AP and store credentials in Flash Memory)
 * MQTT client (connect to MQTT Broker and store credentials in Flash Memory)
+* rtpMIDI client over IP/UDP
+  * play eight voices polyphonic pwm
+  * udp port 5004
+  * use https://www.tobias-erichsen.de/software/rtpmidi.html to connect
 * Sparks (sync mode)
   * Speed control (0.1Hz to 50Hz)
   * Start control (0ms to 12ms)
@@ -30,6 +34,7 @@ The MQTT client supports the following topics. The topic syntax is compatible to
 * cmnd/aurora/status 11
 * cmnd/aurora/para \<speed\>,\<start µs\>,\<power µs\>
 * cmnd/aurora/tone \<freqA Hz\>,\<ratioA %\>,\<freqB Hz\>,\<ratioB %\>
+* cmnd/aurora/pwm \<voice 0-7\>,\<freqA Hz\>,\<ratio %\>
 * cmnd/aurora/sweep \<freqA Hz\>,\<freqB Hz\>,\<duration ms\>,\<ratio %\>
  
 #### Smartphone Screenshot
